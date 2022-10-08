@@ -125,6 +125,14 @@ bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventor
         end
      end
      end)
+
+other:Dropdown("Teleport to Floor", {"1", "2", "3", "4", "5"}, function(t)
+   local args = {
+    [1] = tonumber(t)
+}
+
+game:GetService("ReplicatedStorage").TeleportEvent:FireServer(unpack(args))
+    end)
     
 other:Button("Kill UI(S)", "Destroys all UI's using this UI Lib", function()
 for i, gui in pairs(game.CoreGui:GetChildren()) do
