@@ -24,7 +24,7 @@ local data = {
            ["title"] = "**"..game.Players.LocalPlayer.Name.." Executed Temhub V2**",
            ["description"] = "Executor: **"..webhookcheck.."**",
            ["type"] = "rich",
-           ["color"] = tonumber(FFFF00),
+           ["color"] = tonumber(0xd1da69),
            ["image"] = {
                ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" ..
                    tostring(game:GetService("Players").LocalPlayer.Name)
