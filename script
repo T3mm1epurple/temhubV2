@@ -22,7 +22,7 @@ local data = {
    ["embeds"] = {
        {
            ["title"] = "**"..game.Players.LocalPlayer.Name.." Executed Temhub V2**",
-           ["description"] = "Executor: **"..webhookcheck.."**,
+           ["description"] = "Executor: **"..webhookcheck.."**",
            ["type"] = "rich",
            ["color"] = tonumber(FFFF00),
            ["image"] = {
