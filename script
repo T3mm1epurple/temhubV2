@@ -1,0 +1,96 @@
+local Flux = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/fluxlib.txt")()
+
+local win = Flux:Window("TemTem", "DABS", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
+
+local plr = game.Players.LocalPlayer
+local food = game.ReplicatedStorage.ConsumeStuff.Food
+
+local bingo = win:Tab("Bingo", "http://www.roblox.com/asset/?id=6023426915")
+local clean = win:Tab("Cleaning", "http://www.roblox.com/asset/?id=6023426915")
+local other = win:Tab("Other", "http://www.roblox.com/asset/?id=6023426915")
+
+autobingo = false
+automop = false
+
+
+bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventory", function()
+    local args = {
+        [1] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").CardEvent:FireServer(unpack(args))    
+    end)
+
+    bingo:Toggle("Auto Bingo", "Will auto get bingo card and auto check if bingo card is complete (will hide sheet ui)", autobingo, function(t)
+        autobingo = t
+        while autobingo == true do
+            local args = {
+                [1] = 1
+            }
+            local val = 1
+            for i=1, 3 do
+                wait()
+            game:GetService("ReplicatedStorage").CardEvent:FireServer(unpack(args))  
+            local args = {
+                [1] = val
+            }
+            
+            game:GetService("ReplicatedStorage").BingoEvent:FireServer(unpack(args))
+            val += 1
+            end
+            for i, ui in pairs(plr.PlayerGui:GetChildren()) do
+                if ui.Name == "Sheet" or ui.Name == "Sheet2" or ui.Name == "Sheet3" then
+                    ui:Destroy()
+                end
+            end
+        wait()
+        end
+        end)
+
+    clean:Label("Mopping")
+
+    clean:Line()
+
+    clean:Dropdown("Tool", {"Broom", "Mop"}, function(t)
+    for i,tool in pairs(workspace:GetChildren()) do
+        if tool.Name:lower() == t:lower() then
+            print(t)
+            fireclickdetector(tool:FindFirstChildOfClass("ClickDetector"))
+        end
+        end
+    end)
+
+    clean:Toggle("Auto Mop", "Auto cleans vomit around map if it exists (very easy to be caught using this ill make it better later)", automop, function(t)
+        automop = t
+        while automop == true do
+        for i,vomit in pairs(workspace:GetChildren()) do
+            if vomit.Name == "VomitPart" then
+                    plr.Character.HumanoidRootPart.CFrame = vomit.CFrame + Vector3.new(0, 5, 0)
+                repeat wait()
+                fireproximityprompt(vomit:FindFirstChildOfClass("ProximityPrompt"))
+                until vomit.Parent == nil
+            end
+        end
+        wait()
+        end
+    end)
+    
+ other:Toggle("Disable Seats (dont enable this while sitting)", "Stops player from sitting in seats (good for auto mop)", false, function(t)
+     for i,seat in pairs(workspace:GetDescendants()) do
+        if seat:IsA("Seat") then
+            seat.Disabled = t
+        end
+     end
+     end)
+    
+other:Button("Kill UI(S)", "Destroys all UI's using this UI Lib", function()
+for i, gui in pairs(game.CoreGui:GetChildren()) do
+    if gui.Name == "FluxLib" then
+        gui:Destroy()
+        end
+    end
+end)    
+
+other:Line()
+    
+other:Label("Your fps will be lowered if you open rspy with any auto scripts")
