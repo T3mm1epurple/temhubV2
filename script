@@ -1,3 +1,4 @@
+if _G.key == "temhubv2" then
 local Flux = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/fluxlib.txt")()
 
 local win = Flux:Window("TemTem", "DABS", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
@@ -94,3 +95,6 @@ end)
 other:Line()
     
 other:Label("Your fps will be lowered if you open rspy with any auto scripts")
+else
+print("no key")
+end
