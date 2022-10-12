@@ -112,7 +112,7 @@ bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventor
                     plr.Character.HumanoidRootPart.CFrame = vomit.CFrame + Vector3.new(0, 5, 0)
                     fireproximityprompt(vomit:FindFirstChildOfClass("ProximityPrompt"))
                     wait()
-                until vomit.Parent == nil
+                until vomit == nil
             end
         end
         wait()
