@@ -137,6 +137,8 @@ other:Dropdown("Teleport to Floor", {"1", "2", "3", "4", "5"}, function(t)
 game:GetService("ReplicatedStorage").TeleportEvent:FireServer(unpack(args))
     end)
     
+    other:Line()
+    
 other:Button("Kill UI(S)", "Destroys all UI's using this UI Lib", function()
 for i, gui in pairs(game.CoreGui:GetChildren()) do
     if gui.Name == "FluxLib" then
@@ -145,9 +147,6 @@ for i, gui in pairs(game.CoreGui:GetChildren()) do
     end
 end)    
 
-other:Line()
-    
-other:Label("Your fps will be lowered if you open rspy with any auto scripts")
 else
 print("wrong key")
 if syn then
