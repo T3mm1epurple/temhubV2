@@ -108,8 +108,8 @@ bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventor
         while automop == true do
         for i,vomit in pairs(workspace:GetChildren()) do
             if vomit.Name == "VomitPart" then
+                plr.Character.HumanoidRootPart.CFrame = vomit.CFrame + Vector3.new(0, 5, 0)
                 repeat
-                    plr.Character.HumanoidRootPart.CFrame = vomit.CFrame + Vector3.new(0, 5, 0)
                     fireproximityprompt(vomit:FindFirstChildOfClass("ProximityPrompt"))
                     wait()
                 until vomit == nil
