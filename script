@@ -54,10 +54,10 @@ local level5 = 5248557397
 local placeid = game.PlaceId
 
 if placeid == level1 then
-local bingo = win:Tab("Bingo", "http://www.roblox.com/asset/?id=6023426915")
-local clean = win:Tab("Cleaning", "http://www.roblox.com/asset/?id=6023426915")
+bingo = win:Tab("Bingo", "http://www.roblox.com/asset/?id=6023426915")
+clean = win:Tab("Cleaning", "http://www.roblox.com/asset/?id=6023426915")
 end
-local other = win:Tab("Other", "http://www.roblox.com/asset/?id=6023426915")
+other = win:Tab("Other", "http://www.roblox.com/asset/?id=6023426915")
 
 autobingo = false
 automop = false
