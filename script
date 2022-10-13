@@ -1,5 +1,5 @@
 banlist = {
-    647598508
+    1
     }
     
     local StarterGui = game:GetService("StarterGui")
