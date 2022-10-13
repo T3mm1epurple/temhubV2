@@ -80,21 +80,32 @@ banlist = {
     
     end
     other = win:Tab("Other", "http://www.roblox.com/asset/?id=6023426915")
+    setting = win:Tab("Settings", "http://www.roblox.com/asset/?id=6023426915")
     
-    autobingo = false
-    automop = false
-    autolottery = false
-    ticketnumber = 10
-    randomticket = false
-    soda = ""
-    autosoda = false
-    autodrink = false
-    tpbackdrink = true
+    local originaldata = {  
+    autobingo = false,
+    automop = false,
+    autolottery = false,
+    ticketnumber = 10,
+    randomticket = false,
+    soda = "",
+    autosoda = false,
+    autodrink = false,
+    tpbackdrink = true,
+    enablemoppoint = true,
+    newppos = nil,
+    autosave = true,
+    }
     if placeid == level1 then
     moptppoint = workspace.RoofP.Position + Vector3.new(0, 10, 0)
     end
-    enablemoppoint = true
-    newppos = nil
+
+    if isfile("TemHubV2/data.txt") then
+        local data = game:GetService("HttpService"):JSONDecode(readfile("TemHubV2/data.txt"))
+        originaldata = data
+        print(originaldata)
+        print(data)
+        end
     
     if placeid == level1 then
     bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventory", function()
@@ -113,9 +124,10 @@ banlist = {
             game:GetService("ReplicatedStorage").CardEvent:FireServer(unpack(args))
             end)
     
-        bingo:Toggle("Auto Bingo", "Will auto get bingo card and auto check if bingo card is complete (will hide sheet ui)", autobingo, function(t)
-            autobingo = t
-            while autobingo == true do
+        bingo:Toggle("Auto Bingo", "Will auto get bingo card and auto check if bingo card is complete (will hide sheet ui)", originaldata["autobingo"], function(t)
+            originaldata["autobingo"] = t
+            coroutine.resume(coroutine.create(function()
+            while originaldata["autobingo"] == true do
                 local args = {
                     [1] = 1
                 }
@@ -137,12 +149,14 @@ banlist = {
                 end
             wait()
             end
+        end))
             end)
     
             local sodas = drink:Dropdown("Soda (turn off autobuy before changing)", {}, function(t)
                 local newt = string.split(t, " ")[1]
-                soda = newt
+                originaldata["soda"] = newt
                 print(newt)
+                print(originaldata["soda"])
                 end)
             
                 for i,sod in pairs(workspace["711Stuff"]:GetChildren()) do
@@ -151,8 +165,8 @@ banlist = {
                     end
                  end
     
-                 drink:Toggle("Teleport back to original spot", "Teleports player back to original spot after teleporting with any option below", tpbackdrink, function(t)
-                    tpbackdrink = t
+                 drink:Toggle("Teleport back to original spot", "Teleports player back to original spot after teleporting with any option below", originaldata["tpbackdrink"], function(t)
+                    originaldata["tpbackdrink"] = t
                 end)
     
                  drink:Line()
@@ -160,13 +174,13 @@ banlist = {
                  drink:Button("Buy selected soda", "Will buy selected soda", function()
                     local pos = plr.Character.HumanoidRootPart.Position
                     for i,object in pairs(workspace["711Stuff"]:GetChildren()) do
-                        if object.Name == soda then
+                        if object.Name == originaldata["soda"] then
                             plr.Character.HumanoidRootPart.CFrame = object.Source.CFrame
                             fireproximityprompt(object.Source.Attachment.ProximityPrompt)
                             repeat wait()
                                 fireproximityprompt(object.Source.Attachment.ProximityPrompt)
-                            until plr.Backpack:FindFirstChild(soda)
-                            if tpbackdrink then
+                            until plr.Backpack:FindFirstChild(originaldata["soda"])
+                            if originaldata["tpbackdrink"] then
                             plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
                             end
                         end
@@ -176,13 +190,13 @@ banlist = {
                     drink:Button("Set soda as AutoBuy", "Sets selected soda as AutoBuy after respawn", function()
                         local pos = plr.Character.HumanoidRootPart.Position
                         for i,object in pairs(workspace["711Stuff"]:GetChildren()) do
-                            if object.Name == soda then
+                            if object.Name == originaldata["soda"] then
                                 plr.Character.HumanoidRootPart.CFrame = object.Source.CFrame
                                 fireproximityprompt(object.Source.Attachment2.ProximityPrompt)
                                 repeat wait()
                                     fireproximityprompt(object.Source.Attachment2.ProximityPrompt)
                                 until plr.PlayerGui:FindFirstChild("Message")
-                                if tpbackdrink then
+                                if originaldata["tpbackdrink"] then
                                 plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
                                 end
                             end
@@ -191,14 +205,15 @@ banlist = {
     
                         drink:Line()
     
-                        drink:Toggle("Autobuy selected soda", "Auto buys selected soda after being removed from players inventory", autosoda, function(t)
-                            autosoda = t
-                            while autosoda == true do
+                        drink:Toggle("Autobuy selected soda", "Auto buys selected soda after being removed from players inventory", originaldata["autosoda"], function(t)
+                            originaldata["autosoda"] = t
+                            coroutine.resume(coroutine.create(function()
+                            while originaldata["autosoda"] == true do
                                 if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
-                            if not plr.Backpack:FindFirstChild(soda) and not plr.Character:FindFirstChild(soda) then
+                            if not plr.Backpack:FindFirstChild(originaldata["soda"]) and not plr.Character:FindFirstChild(originaldata["soda"]) then
                                 local pos = plr.Character.HumanoidRootPart.Position
                     for i,object in pairs(workspace["711Stuff"]:GetChildren()) do
-                        if object.Name == soda then
+                        if object.Name == originaldata["soda"] then
                             if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
                             plr.Character.HumanoidRootPart.CFrame = object.Source.CFrame
                             fireproximityprompt(object.Source.Attachment.ProximityPrompt)
@@ -206,9 +221,9 @@ banlist = {
                                 if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
                                 fireproximityprompt(object.Source.Attachment.ProximityPrompt)
                                 end
-                            until plr.Backpack:FindFirstChild(soda)
+                            until plr.Backpack:FindFirstChild(originaldata["soda"])
                             if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
-                                if tpbackdrink then
+                                if originaldata["tpbackdrink"] then
                             plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
                                 end
                             end
@@ -219,25 +234,28 @@ banlist = {
                         end
                             wait()
                             end
+                        end))
                         end)
     
-                        drink:Toggle("Auto drink", "Auto drinks the soda in players inventory", autodrink, function(t)
-                            autodrink = t
-                            while autodrink == true do
-                            if plr.Backpack:FindFirstChild(soda) then
+                        drink:Toggle("Auto drink", "Auto drinks the soda in players inventory", originaldata["autodrink"], function(t)
+                            originaldata["autodrink"] = t
+                            coroutine.resume(coroutine.create(function()
+                            while originaldata["autodrink"] == true do
+                            if plr.Backpack:FindFirstChild(originaldata["soda"]) then
                                 if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
-                                plr.Backpack[soda].Parent = plr.Character
+                                plr.Backpack[originaldata["soda"]].Parent = plr.Character
                                 end
                             end
                             for i,tool in pairs(plr.Character:GetChildren()) do
                                 if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
-                                if tool:IsA("Tool") and tool.Name == soda then
+                                if tool:IsA("Tool") and tool.Name == originaldata["soda"] then
                                     tool:Activate()
                                 end
                                 end
                             end
                             wait()
                             end
+                        end))
                         end)
     
         clean:Dropdown("Mopping Tool", {"Broom", "Mop"}, function(t)
@@ -249,9 +267,10 @@ banlist = {
             end
         end)
     
-        clean:Toggle("Auto Mop", "Auto cleans vomit around map if it exists (very easy to be caught using this ill make it better later)", automop, function(t)
-            automop = t
-            while automop == true do
+        clean:Toggle("Auto Mop", "Auto cleans vomit around map if it exists (very easy to be caught using this ill make it better later)", originaldata["automop"], function(t)
+            originaldata["automop"] = t
+            coroutine.resume(coroutine.create(function()
+            while originaldata["automop"] == true do
                 local yes = false
             for i,vomit in pairs(workspace:GetChildren()) do
                 if vomit.Name == "VomitPart" then
@@ -260,7 +279,7 @@ banlist = {
                     repeat wait()
                         fireproximityprompt(vomit:FindFirstChildOfClass("ProximityPrompt"))
                     until plr.Character:FindFirstChild("MOPHATArm")
-                    if enablemoppoint then
+                    if originaldata["enablemoppoint"] then
                     plr.Character.HumanoidRootPart.CFrame = CFrame.new(moptppoint)
                     end
                     repeat wait()
@@ -268,34 +287,35 @@ banlist = {
                 end
             end
             if yes == true then
-                print(newppos)
-                if newppos ~= nil then
-                plr.Character.HumanoidRootPart.CFrame = CFrame.new(newppos)
+                print(originaldata["newppos"])
+                if originaldata["newppos"] ~= nil then
+                plr.Character.HumanoidRootPart.CFrame = CFrame.new(originaldata["newppos"])
                 end
             end
             wait()
             end
+        end))
         end)
     
         clean:Line()
     
         clean:Button("Set teleport point", "Will set the position of where the player is currently standing", function()
-            newppos = plr.Character.HumanoidRootPart.Position
+            originaldata["newppos"] = plr.Character.HumanoidRootPart.Position
             end)
     
-            clean:Toggle("Enable teleport point", "Will teleport the player to that spot after mopping all current vomit stains (helps with not being caught)", enablemoppoint, function(t)
-                enablemoppoint = t
+            clean:Toggle("Enable teleport point", "Will teleport the player to that spot after mopping all current vomit stains (helps with not being caught)", originaldata["enablemoppoint"], function(t)
+                originaldata["enablemoppoint"] = t
             end)
     end
     
     if placeid == level3 then
         working:Label("Nothing here yet")
-        lottery:Slider("Lottery ticket number", "The number your lottery ticket will be", 10, 99,0,function(t)
-            ticketnumber = t
+        lottery:Slider("Lottery ticket number", "The number your lottery ticket will be", 10, 99,originaldata["ticketnumber"],function(t)
+            originaldata["ticketnumber"] = t
             end)
     
-            lottery:Toggle("Random lottery ticket number", "Instead of using a set ticket number, this will pick a random number between 10-99", autobingo, function(t)
-                randomticket = t
+            lottery:Toggle("Random lottery ticket number", "Instead of using a set ticket number, this will pick a random number between 10-99", originaldata["randomticket"], function(t)
+                originaldata["randomticket"] = t
                 end)
     
                 lottery:Line()
@@ -323,13 +343,14 @@ banlist = {
     
                 lottery:Line()
     
-                lottery:Toggle("Auto Lottery ticket", "Will auto get lottery ticket each time it gets removed", autolottery, function(t)
-                    autolottery = t
-                    while autolottery == true do
-                        if randomticket == false then
+                lottery:Toggle("Auto Lottery ticket", "Will auto get lottery ticket each time it gets removed", originaldata["autolottery"], function(t)
+                    originaldata["autolottery"] = t
+                    coroutine.resume(coroutine.create(function()
+                    while originaldata["autolottery"] == true do
+                        if originaldata["randomticket"] == false then
                             local args = {
                                 [1] = 768,
-                                [2] = tostring(ticketnumber)
+                                [2] = tostring(originaldata["ticketnumber"])
                             }
                             
                             game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))        
@@ -343,6 +364,7 @@ banlist = {
                         end
                     wait()
                     end
+                end))
                     end)
     end
     
@@ -387,10 +409,43 @@ banlist = {
     
     game:GetService("ReplicatedStorage").TeleportEvent:FireServer(unpack(args))
         end)
+
+        setting:Button("Save data", "Saves all values to be loaded again when rejoining (gets rid of old data if it exists and replaces it)", function()
+        if isfolder("TemHubV2") == false then
+        makefolder("TemHubV2")
+        end
+        local datatable = originaldata
+        writefile("TemHubV2/data.txt", game:GetService("HttpService"):JSONEncode(datatable))
+        local data = game:GetService("HttpService"):JSONDecode(readfile("TemHubV2/data.txt"))
+        print(data)
+            end)    
+
+            setting:Button("Delete data", "Deletes all value data", function()
+                delfile("TemHubV2/data.txt")
+                    end)    
         
-        other:Line()
+        setting:Line()
         
-    other:Button("Kill UI(S)", "Destroys all UI's using this UI Lib", function()
+        setting:Toggle("Auto save data", "Auto saves data every 5 minutes", originaldata["autosave"], function(t)
+            originaldata["autosave"] = t
+            coroutine.resume(coroutine.create(function()
+            while originaldata["autosave"] do
+                wait(300)
+            if isfolder("TemHubV2") == false then
+                makefolder("TemHubV2")
+                end
+                local datatable = originaldata
+                writefile("TemHubV2/data.txt", game:GetService("HttpService"):JSONEncode(datatable))
+                local data = game:GetService("HttpService"):JSONDecode(readfile("TemHubV2/data.txt"))
+                print(data)
+                Flux:Notification("Auto saved data successfully", "Okay")
+            end
+        end))
+            end)
+
+                setting:Line()
+        
+    setting:Button("Kill UI(S)", "Destroys all UI's using this UI Lib", function()
     for i, gui in pairs(game.CoreGui:GetChildren()) do
         if gui.Name == "FluxLib" then
             gui:Destroy()
