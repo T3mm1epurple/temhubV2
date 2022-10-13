@@ -71,6 +71,14 @@ bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventor
     game:GetService("ReplicatedStorage").CardEvent:FireServer(unpack(args))    
     end)
 
+    bingo:Button("Throw away card", "Throws away bingo card if player has one", function()
+        local args = {
+            [1] = 2
+        }
+        
+        game:GetService("ReplicatedStorage").CardEvent:FireServer(unpack(args))
+        end)
+
     bingo:Toggle("Auto Bingo", "Will auto get bingo card and auto check if bingo card is complete (will hide sheet ui)", autobingo, function(t)
         autobingo = t
         while autobingo == true do
