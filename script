@@ -1,6 +1,5 @@
 local StarterGui = game:GetService("StarterGui")
 local bindable = Instance.new("BindableFunction")
-_G.key = "temhubv2"
 if _G.key == "temhubv2" then
 StarterGui:SetCore("SendNotification", {
 	Title = "Credits",
