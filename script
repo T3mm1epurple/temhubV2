@@ -106,6 +106,16 @@ banlist = {
         print(originaldata)
         print(data)
         end
+
+        local function savedata()
+            if isfolder("TemHubV2") == false then
+                makefolder("TemHubV2")
+                end
+                local datatable = originaldata
+                writefile("TemHubV2/data.txt", game:GetService("HttpService"):JSONEncode(datatable))
+                local data = game:GetService("HttpService"):JSONDecode(readfile("TemHubV2/data.txt"))
+                print(data)
+        end
     
     if placeid == level1 then
     bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventory", function()
@@ -411,13 +421,7 @@ banlist = {
         end)
 
         setting:Button("Save data", "Saves all values to be loaded again when rejoining (gets rid of old data if it exists and replaces it)", function()
-        if isfolder("TemHubV2") == false then
-        makefolder("TemHubV2")
-        end
-        local datatable = originaldata
-        writefile("TemHubV2/data.txt", game:GetService("HttpService"):JSONEncode(datatable))
-        local data = game:GetService("HttpService"):JSONDecode(readfile("TemHubV2/data.txt"))
-        print(data)
+            savedata()
             end)    
 
             setting:Button("Delete data", "Deletes all value data", function()
@@ -431,13 +435,7 @@ banlist = {
             coroutine.resume(coroutine.create(function()
             while originaldata["autosave"] do
                 wait(300)
-            if isfolder("TemHubV2") == false then
-                makefolder("TemHubV2")
-                end
-                local datatable = originaldata
-                writefile("TemHubV2/data.txt", game:GetService("HttpService"):JSONEncode(datatable))
-                local data = game:GetService("HttpService"):JSONDecode(readfile("TemHubV2/data.txt"))
-                print(data)
+                savedata()
                 Flux:Notification("Auto saved data successfully", "Okay")
             end
         end))
