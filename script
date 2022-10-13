@@ -57,6 +57,15 @@ if placeid == level1 then
 bingo = win:Tab("Bingo", "http://www.roblox.com/asset/?id=6023426915")
 clean = win:Tab("Cleaning", "http://www.roblox.com/asset/?id=6023426915")
 end
+if placeid == level3 then
+
+end
+if placeid == level4 then
+    doctor = win:Tab("Doctor", "http://www.roblox.com/asset/?id=6023426915")
+end
+if placeid == level5 then
+
+end
 other = win:Tab("Other", "http://www.roblox.com/asset/?id=6023426915")
 
 autobingo = false
@@ -134,6 +143,36 @@ bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventor
         wait()
         end
     end)
+end
+
+if placeid == level3 then
+
+end
+
+if placeid == level4 then
+    doctor:Button("Fast Checkup", "Completes doctor checkup as fast as possible", function()
+        local args = {
+            [1] = 1
+        }
+        
+        game:GetService("ReplicatedStorage").DoctorEvent:FireServer(unpack(args))
+        repeat wait()
+        until plr.PlayerGui:FindFirstChild("GuiMessage")
+        for i, message in pairs(plr.PlayerGui:GetChildren()) do
+            if message.Name == "GuiMessage" then
+                message:Destroy()
+            end
+        end
+        fireclickdetector(workspace["intern kun man"].ClickDetector)
+        repeat wait()
+        until plr.PlayerGui:FindFirstChild("GuiMessage")
+        fireclickdetector(workspace["other doc man"].ClickDetector)
+        fireclickdetector(workspace["head doc man"].ClickDetector)
+        Flux:Notification("Completed fast checkup successfully!", "Okay")
+        end)
+end
+if placeid == level5 then
+
 end
     
  other:Toggle("Disable Seats (dont enable this while sitting)", "Stops player from sitting in seats (good for auto mop)", false, function(t)
