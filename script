@@ -78,6 +78,10 @@ randomticket = false
 soda = ""
 autosoda = false
 autodrink = false
+tpbackdrink = true
+moptppoint = workspace.RoofP.Position + Vector3.new(0, 10, 0)
+enablemoppoint = true
+newppos = nil
 
 if placeid == level1 then
 bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventory", function()
@@ -122,7 +126,7 @@ bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventor
         end
         end)
 
-        local sodas = drink:Dropdown("Soda", {}, function(t)
+        local sodas = drink:Dropdown("Soda (turn off autobuy before changing)", {}, function(t)
             local newt = string.split(t, " ")[1]
             soda = newt
             print(newt)
@@ -133,6 +137,10 @@ bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventor
                     sodas:Add(sod.Price.TextLabel.Text)
                 end
              end
+
+             drink:Toggle("Teleport back to original spot", "Teleports player back to original spot after teleporting with any option below", tpbackdrink, function(t)
+                tpbackdrink = t
+            end)
 
              drink:Line()
 
@@ -145,7 +153,9 @@ bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventor
                         repeat wait()
                             fireproximityprompt(object.Source.Attachment.ProximityPrompt)
                         until plr.Backpack:FindFirstChild(soda)
+                        if tpbackdrink then
                         plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                        end
                     end
                 end
                 end)
@@ -159,33 +169,41 @@ bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventor
                             repeat wait()
                                 fireproximityprompt(object.Source.Attachment2.ProximityPrompt)
                             until plr.PlayerGui:FindFirstChild("Message")
+                            if tpbackdrink then
                             plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                            end
                         end
                     end
                     end)
 
                     drink:Line()
 
-                    drink:Toggle("Auto buy selected soda", "Auto buys selected soda after being removed from players inventory", autosoda, function(t)
+                    drink:Toggle("Autobuy selected soda", "Auto buys selected soda after being removed from players inventory", autosoda, function(t)
                         autosoda = t
                         while autosoda == true do
+                            if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
                         if not plr.Backpack:FindFirstChild(soda) and not plr.Character:FindFirstChild(soda) then
                             local pos = plr.Character.HumanoidRootPart.Position
                 for i,object in pairs(workspace["711Stuff"]:GetChildren()) do
                     if object.Name == soda then
-                        if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") then
+                        if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
                         plr.Character.HumanoidRootPart.CFrame = object.Source.CFrame
                         fireproximityprompt(object.Source.Attachment.ProximityPrompt)
                         repeat wait()
+                            if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
                             fireproximityprompt(object.Source.Attachment.ProximityPrompt)
+                            end
                         until plr.Backpack:FindFirstChild(soda)
-                        if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") then
+                        if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
+                            if tpbackdrink then
                         plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                            end
                         end
                     end
                     end
                 end
                         end
+                    end
                         wait()
                         end
                     end)
@@ -194,12 +212,12 @@ bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventor
                         autodrink = t
                         while autodrink == true do
                         if plr.Backpack:FindFirstChild(soda) then
-                            if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") then
+                            if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
                             plr.Backpack[soda].Parent = plr.Character
                             end
                         end
                         for i,tool in pairs(plr.Character:GetChildren()) do
-                            if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") then
+                            if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
                             if tool:IsA("Tool") and tool.Name == soda then
                                 tool:Activate()
                             end
@@ -221,19 +239,40 @@ bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventor
     clean:Toggle("Auto Mop", "Auto cleans vomit around map if it exists (very easy to be caught using this ill make it better later)", automop, function(t)
         automop = t
         while automop == true do
+            local yes = false
         for i,vomit in pairs(workspace:GetChildren()) do
             if vomit.Name == "VomitPart" then
+                yes = true
                 plr.Character.HumanoidRootPart.CFrame = vomit.CFrame + Vector3.new(0, 5, 0)
                 repeat wait()
                     fireproximityprompt(vomit:FindFirstChildOfClass("ProximityPrompt"))
                 until plr.Character:FindFirstChild("MOPHATArm")
+                if enablemoppoint then
+                plr.Character.HumanoidRootPart.CFrame = CFrame.new(moptppoint)
+                end
                 repeat wait()
                 until not plr.Character:FindFirstChild("MOPHATArm")
+            end
+        end
+        if yes == true then
+            print(newppos)
+            if newppos ~= nil then
+            plr.Character.HumanoidRootPart.CFrame = CFrame.new(newppos)
             end
         end
         wait()
         end
     end)
+
+    clean:Line()
+
+    clean:Button("Set teleport point", "Will set the position of where the player is currently standing", function()
+        newppos = plr.Character.HumanoidRootPart.Position
+        end)
+
+        clean:Toggle("Enable teleport point", "Will teleport the player to that spot after mopping all current vomit stains (helps with not being caught)", enablemoppoint, function(t)
+            enablemoppoint = t
+        end)
 end
 
 if placeid == level3 then
