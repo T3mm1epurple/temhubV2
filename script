@@ -58,7 +58,8 @@ bingo = win:Tab("Bingo", "http://www.roblox.com/asset/?id=6023426915")
 clean = win:Tab("Cleaning", "http://www.roblox.com/asset/?id=6023426915")
 end
 if placeid == level3 then
-
+    working = win:Tab("Working", "http://www.roblox.com/asset/?id=6023426915")
+    lottery = win:Tab("Lottery", "http://www.roblox.com/asset/?id=6023426915")
 end
 if placeid == level4 then
     doctor = win:Tab("Doctor", "http://www.roblox.com/asset/?id=6023426915")
@@ -70,6 +71,9 @@ other = win:Tab("Other", "http://www.roblox.com/asset/?id=6023426915")
 
 autobingo = false
 automop = false
+autolottery = false
+ticketnumber = 10
+randomticket = false
 
 if placeid == level1 then
 bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventory", function()
@@ -146,7 +150,61 @@ bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventor
 end
 
 if placeid == level3 then
+    working:Label("Nothing here yet")
+    lottery:Slider("Lottery ticket number", "The number your lottery ticket will be", 10, 99,0,function(t)
+        ticketnumber = t
+        end)
 
+        lottery:Toggle("Random lottery ticket number", "Instead of using a set ticket number, this will pick a random number between 10-99", autobingo, function(t)
+            randomticket = t
+            end)
+
+            lottery:Line()
+
+    lottery:Button("Get lottery ticket", "Gives player lottery ticket if one isn't in inventory", function()
+        if randomticket == false then
+        local args = {
+            [1] = 768,
+            [2] = tostring(ticketnumber)
+        }
+        
+        game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))        
+    else
+        local args = {
+            [1] = 768,
+            [2] = tostring(math.random(10, 99))
+        }
+        
+        game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))   
+    end
+        end)
+        lottery:Button("Throw away lottery ticket", "Throws away players lottery ticket if they have one", function()
+            game:GetService("ReplicatedStorage").ThrowEvent:FireServer()
+            end)
+
+            lottery:Line()
+
+            lottery:Toggle("Auto Lottery ticket", "Will auto get lottery ticket each time it gets removed", autolottery, function(t)
+                autolottery = t
+                while autolottery == true do
+                    if randomticket == false then
+                        local args = {
+                            [1] = 768,
+                            [2] = tostring(ticketnumber)
+                        }
+                        
+                        game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))        
+                    else
+                        local args = {
+                            [1] = 768,
+                            [2] = tostring(math.random(10, 99))
+                        }
+                        
+                        game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))   
+                    end
+                wait()
+                end
+                end)
 end
 
 if placeid == level4 then
