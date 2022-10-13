@@ -55,6 +55,7 @@ local placeid = game.PlaceId
 
 if placeid == level1 then
 bingo = win:Tab("Bingo", "http://www.roblox.com/asset/?id=6023426915")
+drink = win:Tab("7/11", "http://www.roblox.com/asset/?id=6023426915")
 clean = win:Tab("Cleaning", "http://www.roblox.com/asset/?id=6023426915")
 end
 if placeid == level3 then
@@ -74,6 +75,9 @@ automop = false
 autolottery = false
 ticketnumber = 10
 randomticket = false
+soda = ""
+autosoda = false
+autodrink = false
 
 if placeid == level1 then
 bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventory", function()
@@ -118,11 +122,94 @@ bingo:Button("Get bingo card", "Gives player bingo card if one isn't in inventor
         end
         end)
 
-    clean:Label("Mopping")
+        local sodas = drink:Dropdown("Soda", {}, function(t)
+            local newt = string.split(t, " ")[1]
+            soda = newt
+            print(newt)
+            end)
+        
+            for i,sod in pairs(workspace["711Stuff"]:GetChildren()) do
+                if sod:IsA("Model") then
+                    sodas:Add(sod.Price.TextLabel.Text)
+                end
+             end
 
-    clean:Line()
+             drink:Line()
 
-    clean:Dropdown("Tool", {"Broom", "Mop"}, function(t)
+             drink:Button("Buy selected soda", "Will buy selected soda", function()
+                local pos = plr.Character.HumanoidRootPart.Position
+                for i,object in pairs(workspace["711Stuff"]:GetChildren()) do
+                    if object.Name == soda then
+                        plr.Character.HumanoidRootPart.CFrame = object.Source.CFrame
+                        fireproximityprompt(object.Source.Attachment.ProximityPrompt)
+                        repeat wait()
+                            fireproximityprompt(object.Source.Attachment.ProximityPrompt)
+                        until plr.Backpack:FindFirstChild(soda)
+                        plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                    end
+                end
+                end)
+
+                drink:Button("Set soda as AutoBuy", "Sets selected soda as AutoBuy after respawn", function()
+                    local pos = plr.Character.HumanoidRootPart.Position
+                    for i,object in pairs(workspace["711Stuff"]:GetChildren()) do
+                        if object.Name == soda then
+                            plr.Character.HumanoidRootPart.CFrame = object.Source.CFrame
+                            fireproximityprompt(object.Source.Attachment2.ProximityPrompt)
+                            repeat wait()
+                                fireproximityprompt(object.Source.Attachment2.ProximityPrompt)
+                            until plr.PlayerGui:FindFirstChild("Message")
+                            plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                        end
+                    end
+                    end)
+
+                    drink:Line()
+
+                    drink:Toggle("Auto buy selected soda", "Auto buys selected soda after being removed from players inventory", autosoda, function(t)
+                        autosoda = t
+                        while autosoda == true do
+                        if not plr.Backpack:FindFirstChild(soda) and not plr.Character:FindFirstChild(soda) then
+                            local pos = plr.Character.HumanoidRootPart.Position
+                for i,object in pairs(workspace["711Stuff"]:GetChildren()) do
+                    if object.Name == soda then
+                        if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") then
+                        plr.Character.HumanoidRootPart.CFrame = object.Source.CFrame
+                        fireproximityprompt(object.Source.Attachment.ProximityPrompt)
+                        repeat wait()
+                            fireproximityprompt(object.Source.Attachment.ProximityPrompt)
+                        until plr.Backpack:FindFirstChild(soda)
+                        if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") then
+                        plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                        end
+                    end
+                    end
+                end
+                        end
+                        wait()
+                        end
+                    end)
+
+                    drink:Toggle("Auto drink", "Auto drinks the soda in players inventory", autodrink, function(t)
+                        autodrink = t
+                        while autodrink == true do
+                        if plr.Backpack:FindFirstChild(soda) then
+                            if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") then
+                            plr.Backpack[soda].Parent = plr.Character
+                            end
+                        end
+                        for i,tool in pairs(plr.Character:GetChildren()) do
+                            if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") then
+                            if tool:IsA("Tool") and tool.Name == soda then
+                                tool:Activate()
+                            end
+                            end
+                        end
+                        wait()
+                        end
+                    end)
+
+    clean:Dropdown("Mopping Tool", {"Broom", "Mop"}, function(t)
     for i,tool in pairs(workspace:GetChildren()) do
         if tool.Name:lower() == t:lower() then
             print(t)
