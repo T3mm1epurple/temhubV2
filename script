@@ -289,18 +289,22 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                             originaldata["autodrink"] = t
                             coroutine.resume(coroutine.create(function()
                             while originaldata["autodrink"] == true do
+                                if plr.Character ~= nil and plr.Character.Humanoid.Health > 0 then
                             if plr.Backpack:FindFirstChild(originaldata["soda"]) then
-                                if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
+                                if plr.Character ~= nil and plr.Character.Humanoid.Health > 0 then
                                 plr.Backpack[originaldata["soda"]].Parent = plr.Character
                                 end
                             end
+                            if plr.Character ~= nil and plr.Character.Humanoid.Health > 0 then
                             for i,tool in pairs(plr.Character:GetChildren()) do
-                                if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
+                                if plr.Character ~= nil and plr.Character.Humanoid.Health > 0 then
                                 if tool:IsA("Tool") and tool.Name == originaldata["soda"] then
                                     tool:Activate()
                                 end
                                 end
                             end
+                        end
+                        end
                             wait()
                             end
                         end))
