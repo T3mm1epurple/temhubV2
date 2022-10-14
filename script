@@ -288,12 +288,13 @@ banlist = {
                     plr.Character.HumanoidRootPart.CFrame = vomit.CFrame + Vector3.new(0, 5, 0)
                     repeat wait()
                         fireproximityprompt(vomit:FindFirstChildOfClass("ProximityPrompt"))
-                    until plr.Character:FindFirstChild("MOPHATArm")
-                    if originaldata["enablemoppoint"] then
+                    until plr.Character:FindFirstChild("MOPHATArm") or plr.Character:FindFirstChild("BROOOMHATArm")
+                    print("test")
+                    if originaldata["enablemoppoint"] == true then
                     plr.Character.HumanoidRootPart.CFrame = CFrame.new(moptppoint)
                     end
                     repeat wait()
-                    until not plr.Character:FindFirstChild("MOPHATArm")
+                    until not plr.Character:FindFirstChild("MOPHATArm") or not plr.Character:FindFirstChild("BROOOMHATArm")
                 end
             end
             if yes == true then
