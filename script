@@ -128,7 +128,6 @@ banlist = { --userids
 
         if isfile("TemHubV2/buy.txt") then
             local buytable = game:GetService("HttpService"):JSONDecode(readfile("TemHubV2/buy.txt"))
-            delfile("TemHubV2/buy.txt")
             for i, object in pairs(buytable) do
                 local newobject = string.split(object, "/")[1]
                 local floornum = string.split(object, "/")[2]
@@ -136,6 +135,7 @@ banlist = { --userids
                     if model.Name == newobject then
                         fireclickdetector(model:FindFirstChildOfClass("ClickDetector"))
                         Flux:Notification("Got "..newobject..", teleporting to floor, "..floornum, "Okay")
+                                    delfile("TemHubV2/buy.txt")
                         wait(5)
                         floorteleport(floornum)
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
