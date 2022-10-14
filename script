@@ -502,6 +502,8 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
         end
     end)    
     
+    setting:Label("Version 2.4")
+    
     else
     print("wrong key")
     if syn then
