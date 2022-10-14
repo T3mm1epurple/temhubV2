@@ -11,7 +11,7 @@ banlist = { --userids
     end
     end
     if go == false then
-    if _G.key == "wtfdoiadd" then
+    if _G.key == "wtfdoiadd" or _G.key == "adminkey" then
     StarterGui:SetCore("SendNotification", {
         Title = "Credits",
         Text = "created by Forxsion#4954",
@@ -143,7 +143,7 @@ banlist = { --userids
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
                         if State == Enum.TeleportState.Started then
                         syn.queue_on_teleport([[wait(5) game.Players.LocalPlayer.PlayerGui.Menu.Enabled = false workspace.CurrentCamera.CameraType = Enum.CameraType.Custom workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.CleanBucket.Bucket.CFrame wait(1) fireproximityprompt(workspace.CleanBucket.Bucket.Attachment.ProximityPrompt) wait(3) _G.key = "temhubv2" --.gg/n7fFChP5x5 changes every now and then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.CleanBucket.Bucket.CFrame wait(1) fireproximityprompt(workspace.CleanBucket.Bucket.Attachment.ProximityPrompt) wait(3) _G.key = "adminkey" --.gg/n7fFChP5x5 changes every now and then
 loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", true))()]]) -- script there
                         end
                         end)
@@ -350,7 +350,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                     floorteleport(4)
                     game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
                         if State == Enum.TeleportState.Started then
-                        syn.queue_on_teleport([[wait(3) _G.key = "temhubv2" --.gg/n7fFChP5x5 changes every now and then
+                        syn.queue_on_teleport([[wait(3) _G.key = "adminkey" --.gg/n7fFChP5x5 changes every now and then
 loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", true))()]]) -- script there
                         end
                         end)
