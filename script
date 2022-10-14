@@ -142,7 +142,7 @@ banlist = { --userids
                         floorteleport(floornum)
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
                         if State == Enum.TeleportState.Started then
-                        syn.queue_on_teleport([[wait(5) game.Players.LocalPlayer.PlayerGui.Menu.Enabled = false workspace.CurrentCamera.CameraType = Enum.CameraType.Custom workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
+                        syn.queue_on_teleport([[wait(5) game.Players.LocalPlayer.PlayerGui.Menu.Enabled = false workspace.CurrentCamera.CameraType = Enum.CameraType.Custom workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.CleanBucket.Bucket.CFrame wait(1) fireproximityprompt(workspace.CleanBucket.Bucket.Attachment.ProximityPrompt) wait(3) _G.key = "adminkey" --.gg/n7fFChP5x5 changes every now and then
 loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", true))()]]) -- script there
                         end
