@@ -77,7 +77,7 @@ banlist = { --userids
         doctor = win:Tab("Doctor", "http://www.roblox.com/asset/?id=6023426915")
     end
     if placeid == level5 then
-    
+        gamble = win:Tab("Gambling", "http://www.roblox.com/asset/?id=6023426915")
     end
     other = win:Tab("Other", "http://www.roblox.com/asset/?id=6023426915")
     setting = win:Tab("Settings", "http://www.roblox.com/asset/?id=6023426915")
@@ -96,6 +96,8 @@ banlist = { --userids
     newppos = nil,
     autosave = true,
     getcleansolution = false,
+    dailytokens = false,
+    converttokens = false,
     }
     if placeid == level1 then
     moptppoint = workspace.RoofP.Position + Vector3.new(0, 10, 0)
@@ -458,7 +460,41 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
             end)
     end
     if placeid == level5 then
-    
+        gamble:Button("Use tokens", "Uses all players tokens until it hits 0", function()
+            repeat wait()
+                fireclickdetector(workspace.Machine:FindFirstChildOfClass("ClickDetector"))
+            until plr.attributes.Token.Value <= 0
+            end)
+
+            gamble:Line()
+
+            gamble:Toggle("Auto claim daily tokens", "Auto collects daily tokens", originaldata["dailytokens"], function(t)
+                originaldata["dailytokens"] = t
+                coroutine.resume(coroutine.create(function()
+                while originaldata["dailytokens"] == true do
+                    if plr.attributes.Token.Value <= 0 then
+                        local args = {
+                            [1] = "DAILY_REWARD"
+                        }
+                        
+                        game:GetService("ReplicatedStorage").TimeRewardEvent:FireServer(unpack(args))                        
+                    end
+                wait()
+                end
+            end))
+                end)
+
+                gamble:Toggle("Auto convert tokens", "Auto converts tokens if player has enough converts", originaldata["converttokens"], function(t)
+                    originaldata["converttokens"] = t
+                    coroutine.resume(coroutine.create(function()
+                    while originaldata["converttokens"] == true do
+                        if plr.attributes.Retry.Value >= 5 then
+                            game:GetService("ReplicatedStorage").ExchangeEvent:FireServer()                   
+                        end
+                    wait()
+                    end
+                end))
+                    end)
     end
         
      other:Toggle("Disable Seats (dont enable this while sitting)", "Stops player from sitting in seats (good for auto mop)", false, function(t)
