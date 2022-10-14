@@ -503,7 +503,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
         end
     end)    
     
-    setting:Label("Version 2.4 TESTING VERSION")
+    setting:Label("Version 2.5 TESTING VERSION")
     
     else
     print("wrong key")
