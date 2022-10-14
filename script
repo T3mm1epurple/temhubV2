@@ -135,7 +135,8 @@ banlist = { --userids
                 for i, model in pairs(workspace:GetChildren()) do
                     if model.Name == newobject then
                         fireclickdetector(model:FindFirstChildOfClass("ClickDetector"))
-                        wait(3)
+                        Flux:Notification("Got "..newobject..", teleporting to floor, "..floornum, "Okay")
+                        wait(5)
                         floorteleport(floornum)
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
                         if State == Enum.TeleportState.Started then
@@ -502,7 +503,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
         end
     end)    
     
-    setting:Label("Version 2.4")
+    setting:Label("Version 2.4 TESTING VERSION")
     
     else
     print("wrong key")
