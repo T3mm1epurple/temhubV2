@@ -11,7 +11,7 @@ banlist = { --userids
     end
     end
     if go == false then
-    if _G.key == "temhubv2" then
+    if _G.key == "wtfdoiadd" then
     StarterGui:SetCore("SendNotification", {
         Title = "Credits",
         Text = "created by Forxsion#4954",
