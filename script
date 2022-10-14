@@ -1,4 +1,4 @@
-banlist = {
+banlist = { --userids
     1
     }
     
@@ -95,6 +95,7 @@ banlist = {
     enablemoppoint = true,
     newppos = nil,
     autosave = true,
+    getcleansolution = false,
     }
     if placeid == level1 then
     moptppoint = workspace.RoofP.Position + Vector3.new(0, 10, 0)
@@ -115,6 +116,31 @@ banlist = {
                 writefile("TemHubV2/data.txt", game:GetService("HttpService"):JSONEncode(datatable))
                 local data = game:GetService("HttpService"):JSONDecode(readfile("TemHubV2/data.txt"))
                 print(data)
+        end
+
+        local function floorteleport(num)
+            local args = {
+                [1] = tonumber(num)
+            }
+            
+            game:GetService("ReplicatedStorage").TeleportEvent:FireServer(unpack(args))
+        end
+
+        if isfile("TemHubV2/buy.txt") then
+            local buytable = game:GetService("HttpService"):JSONDecode(readfile("TemHubV2/buy.txt"))
+            for i, object in pairs(buytable) do
+                local newobject = string.split(object, "/")[1]
+                local floornum = string.split(object, "/")[2]
+                for i, model in pairs(workspace:GetChildren()) do
+                    if model.Name == newobject then
+                        delfile("TemHubV2/buy.txt")
+                        fireclickdetector(model:FindFirstChildOfClass("ClickDetector"))
+                        repeat wait()
+                        until plr.Backpack:FindFirstChild(model.Name)
+                        floorteleport(floornum)
+                    end
+                end
+            end
         end
     
     if placeid == level1 then
@@ -276,8 +302,8 @@ banlist = {
             end
             end
         end)
-    
-        clean:Toggle("Auto Mop", "Auto cleans vomit around map if it exists (very easy to be caught using this ill make it better later)", originaldata["automop"], function(t)
+    local dog = false
+        clean:Toggle("Auto Mop", "Auto cleans vomit around map if it exists", originaldata["automop"], function(t)
             originaldata["automop"] = t
             coroutine.resume(coroutine.create(function()
             while originaldata["automop"] == true do
@@ -303,9 +329,32 @@ banlist = {
                 plr.Character.HumanoidRootPart.CFrame = CFrame.new(originaldata["newppos"])
                 end
             end
+            if originaldata["getcleansolution"] == true then
+                if plr.attributes.CleanWater.Value <= 0 then
+                    if dog == false then
+                        dog = true
+                    savedata()
+                    local buytable = {
+                        "Cleaning Solution/1"
+                    }
+                    writefile("TemHubV2/buy.txt", game:GetService("HttpService"):JSONEncode(buytable))
+                    floorteleport(4)
+                    game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
+                        if State == Enum.TeleportState.Started then
+                        syn.queue_on_teleport([[_G.key = "temhubv2" --.gg/n7fFChP5x5 changes every now and then
+loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", true))()]]) -- script there
+                        end
+                        end
+                        end)
+                end
+            end
             wait()
             end
         end))
+        end)
+
+        clean:Toggle("Auto get cleaning solution", "When needed during Auto mop, the player will be teleported to level 4 and teleported back to level 1 with cleaning solution.", originaldata["getcleansolution"], function(t)
+            originaldata["getcleansolution"] = t
         end)
     
         clean:Line()
@@ -414,11 +463,7 @@ banlist = {
          end)
     
     other:Dropdown("Teleport to Floor", {"1", "2", "3", "4", "5"}, function(t)
-       local args = {
-        [1] = tonumber(t)
-    }
-    
-    game:GetService("ReplicatedStorage").TeleportEvent:FireServer(unpack(args))
+       floorteleport(t)
         end)
 
         setting:Button("Save data", "Saves all values to be loaded again when rejoining (gets rid of old data if it exists and replaces it)", function()
