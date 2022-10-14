@@ -294,7 +294,7 @@ banlist = {
                     plr.Character.HumanoidRootPart.CFrame = CFrame.new(moptppoint)
                     end
                     repeat wait()
-                    until not plr.Character:FindFirstChild("MOPHATArm") or not plr.Character:FindFirstChild("BROOOMHATArm")
+                    until not plr.Character:FindFirstChild("MOPHATArm") and not plr.Character:FindFirstChild("BROOOMHATArm")
                 end
             end
             if yes == true then
