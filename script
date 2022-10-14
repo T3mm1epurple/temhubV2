@@ -255,31 +255,39 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                             originaldata["autosoda"] = t
                             coroutine.resume(coroutine.create(function()
                             while originaldata["autosoda"] == true do
-                                if plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 then
+                                if plr.Character ~= nil and plr.Character:FindFirstChild("Humanoid") then
+                                    if plr.Character.Humanoid.Health > 0 then
                             if not plr.Backpack:FindFirstChild(originaldata["soda"]) and not plr.Character:FindFirstChild(originaldata["soda"]) then
                                 local pos = plr.Character.HumanoidRootPart.Position
                     for i,object in pairs(workspace["711Stuff"]:GetChildren()) do
                         if object.Name == originaldata["soda"] then
-                            if plr.Character ~= nil and plr.Character.Humanoid.Health > 0 then
+                            if plr.Character ~= nil and plr.Character:FindFirstChild("Humanoid") then
+                                if plr.Character.Humanoid.Health > 0 then
                             repeat wait(1)
                             until not plr.Character.Head:FindFirstChildOfClass("ParticleEmitter") or plr.Character.Humanoid.Health <= 0
                             plr.Character.HumanoidRootPart.CFrame = object.Source.CFrame
                             fireproximityprompt(object.Source.Attachment.ProximityPrompt)
                             repeat wait()
-                                if plr.Character ~= nil and plr.Character.Humanoid.Health > 0 then
+                                if plr.Character ~= nil and plr.Character:FindFirstChild("Humanoid") then
+                                    if plr.Character.Humanoid.Health > 0 then
                                 fireproximityprompt(object.Source.Attachment.ProximityPrompt)
                                 end
+                            end
                             until plr.Backpack:FindFirstChild(originaldata["soda"]) or plr.Character.Humanoid.Health <= 0 or plr.Character:FindFirstChild(originaldata["soda"])
-                            if plr.Character ~= nil and plr.Character.Humanoid.Health > 0 then
+                            if plr.Character ~= nil and plr.Character:FindFirstChild("Humanoid") then
+                                if plr.Character.Humanoid.Health > 0 then
                                 if originaldata["tpbackdrink"] then
                             plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
                                 end
                             end
+                            end
+                        end
                         end
                         end
                     end
                             end
                         end
+                    end
                             wait()
                             end
                         end))
@@ -289,21 +297,21 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                             originaldata["autodrink"] = t
                             coroutine.resume(coroutine.create(function()
                             while originaldata["autodrink"] == true do
-                                if plr.Character ~= nil and plr.Character.Humanoid.Health > 0 then
+                                if plr.Character ~= nil and plr.Character:FindFirstChild("Humanoid") then
+                                    if plr.Character.Humanoid.Health > 0 then
                             if plr.Backpack:FindFirstChild(originaldata["soda"]) then
-                                if plr.Character ~= nil and plr.Character.Humanoid.Health > 0 then
                                 plr.Backpack[originaldata["soda"]].Parent = plr.Character
-                                end
                             end
-                            if plr.Character ~= nil and plr.Character.Humanoid.Health > 0 then
                             for i,tool in pairs(plr.Character:GetChildren()) do
-                                if plr.Character ~= nil and plr.Character.Humanoid.Health > 0 then
+                                if plr.Character ~= nil and plr.Character:FindFirstChild("Humanoid") then
+                                    if plr.Character.Humanoid.Health > 0 then
                                 if tool:IsA("Tool") and tool.Name == originaldata["soda"] then
                                     tool:Activate()
                                 end
-                                end
+                            end
                             end
                         end
+                    end
                         end
                             wait()
                             end
