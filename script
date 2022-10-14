@@ -141,7 +141,7 @@ banlist = { --userids
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
                         if State == Enum.TeleportState.Started then
                         syn.queue_on_teleport([[wait(5) _G.key = "temhubv2" --.gg/n7fFChP5x5 changes every now and then
-loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", true))()]]) -- script there
+loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", true))() game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.CleanBucket.Bucket.CFrame wait(1) fireproximityprompt(workspace.CleanBucket.Bucket.Attachment.ProximityPrompt)]]) -- script there
                         end
                         end)
                     end
@@ -503,7 +503,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
         end
     end)    
     
-    setting:Label("Version 2.55 TESTING VERSION")
+    setting:Label("Version 2.5")
     
     else
     print("wrong key")
