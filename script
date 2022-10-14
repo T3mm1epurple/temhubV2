@@ -12,6 +12,7 @@ banlist = { --userids
     end
     if go == false then
     if _G.key == "wtfdoiadd" or _G.key == "adminkey" then
+    _G.key = "509u289y4h3rinf2ri-023tjrefomvodnos3n"
     StarterGui:SetCore("SendNotification", {
         Title = "Credits",
         Text = "created by Forxsion#4954",
@@ -98,6 +99,7 @@ banlist = { --userids
     getcleansolution = false,
     dailytokens = false,
     converttokens = false,
+    autolaptop = false,
     }
     if placeid == level1 then
     moptppoint = workspace.RoofP.Position + Vector3.new(0, 10, 0)
@@ -508,6 +510,20 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     other:Dropdown("Teleport to Floor", {"1", "2", "3", "4", "5"}, function(t)
        floorteleport(t)
         end)
+
+        other:Line()
+
+        other:Toggle("Auto laptop", "Auto equips laptop at all times", originaldata["autolaptop"], function(t)
+            originaldata["autolaptop"] = t
+            coroutine.resume(coroutine.create(function()
+            while originaldata["autolaptop"] == true do
+                if plr.Backpack:FindFirstChild("Laptop") then
+                    plr.Backpack.Laptop.Parent = plr.Character           
+                end
+            wait()
+            end
+        end))
+            end)
 
         setting:Button("Save data", "Saves all values to be loaded again when rejoining (gets rid of old data if it exists and replaces it)", function()
             savedata()
