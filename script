@@ -128,12 +128,12 @@ banlist = { --userids
 
         if isfile("TemHubV2/buy.txt") then
             local buytable = game:GetService("HttpService"):JSONDecode(readfile("TemHubV2/buy.txt"))
+            delfile("TemHubV2/buy.txt")
             for i, object in pairs(buytable) do
                 local newobject = string.split(object, "/")[1]
                 local floornum = string.split(object, "/")[2]
                 for i, model in pairs(workspace:GetChildren()) do
                     if model.Name == newobject then
-                        delfile("TemHubV2/buy.txt")
                         fireclickdetector(model:FindFirstChildOfClass("ClickDetector"))
                         wait(3)
                         floorteleport(floornum)
