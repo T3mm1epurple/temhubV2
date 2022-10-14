@@ -12,7 +12,6 @@ banlist = { --userids
     end
     if go == false then
     if _G.key == "wtfdoiadd" or _G.key == "adminkey" then
-    _G.key = "509u289y4h3rinf2ri-023tjrefomvodnos3n"
     StarterGui:SetCore("SendNotification", {
         Title = "Credits",
         Text = "created by Forxsion#4954",
@@ -508,7 +507,9 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
          end)
     
     other:Dropdown("Teleport to Floor", {"1", "2", "3", "4", "5"}, function(t)
-       floorteleport(t)
+        local newnum = string.split(t, " ")[1]
+        print(newnum)
+       floorteleport(newnum)
         end)
 
         other:Line()
