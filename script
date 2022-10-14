@@ -344,8 +344,8 @@ banlist = { --userids
                         syn.queue_on_teleport([[_G.key = "temhubv2" --.gg/n7fFChP5x5 changes every now and then
 loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", true))()]]) -- script there
                         end
-                        end
                         end)
+                end
                 end
             end
             wait()
