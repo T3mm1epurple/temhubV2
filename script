@@ -135,9 +135,14 @@ banlist = { --userids
                     if model.Name == newobject then
                         delfile("TemHubV2/buy.txt")
                         fireclickdetector(model:FindFirstChildOfClass("ClickDetector"))
-                        repeat wait()
-                        until plr.Backpack:FindFirstChild(model.Name)
+                        wait(3)
                         floorteleport(floornum)
+game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
+                        if State == Enum.TeleportState.Started then
+                        syn.queue_on_teleport([[_G.key = "temhubv2" --.gg/n7fFChP5x5 changes every now and then
+loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", true))()]]) -- script there
+                        end
+                        end)
                     end
                 end
             end
