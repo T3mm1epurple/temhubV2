@@ -63,6 +63,25 @@ banlist = { --userids
     local level4 = 4684427971
     local level5 = 5248557397
     local placeid = game.PlaceId
+
+local Players = game:GetService("Players")
+
+local GC = getconnections or get_signal_cons --Anti Afk
+	if GC then
+		for i,v in pairs(GC(Players.LocalPlayer.Idled)) do
+			if v["Disable"] then
+				v["Disable"](v)
+			elseif v["Disconnect"] then
+				v["Disconnect"](v)
+			end
+		end
+	else
+		Players.LocalPlayer.Idled:Connect(function()
+			local VirtualUser = game:GetService("VirtualUser")
+			VirtualUser:CaptureController()
+			VirtualUser:ClickButton2(Vector2.new())
+		end)
+	end
     
     if placeid == level1 then
     bingo = win:Tab("Bingo", "http://www.roblox.com/asset/?id=6023426915")
@@ -735,7 +754,11 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
         end
     end)    
     
-    setting:Label("Version 2.8")
+    setting:Label("Built in Anti-Afk")
+
+    setting:Line()
+
+    setting:Label("Version 2.5")
     
     else
     print("wrong key")
