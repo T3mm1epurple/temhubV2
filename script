@@ -226,7 +226,7 @@ local GC = getconnections or get_signal_cons --Anti Afk
                 print(originaldata["supplytype"])
                 end)
 
-                if plr.attributes.TotalSupplyNo.Value >= 150 then
+                if plr.attributes.SupplySold.Value >= 150 then
                 suptype:Add("4 (50 goods)")
                 end
 			
@@ -691,7 +691,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     setting:Label("Built in Anti-Afk")
 
-    setting:Label("Version 2.7")
+    setting:Label("Version 2.5")
     
     else
     print("wrong key")
