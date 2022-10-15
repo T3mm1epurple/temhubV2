@@ -756,8 +756,6 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     setting:Label("Built in Anti-Afk")
 
-    setting:Line()
-
     setting:Label("Version 2.5")
     
     else
