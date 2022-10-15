@@ -12,6 +12,7 @@ banlist = { --userids
     end
     if go == false then
     if _G.key == "wtfdoiadd" or _G.key == "adminkey" then
+_G.key = "4toj34iotu490u9056u3589rehgvenvoenfg"
     StarterGui:SetCore("SendNotification", {
         Title = "Credits",
         Text = "created by Forxsion#4954",
