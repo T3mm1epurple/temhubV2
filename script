@@ -11,8 +11,8 @@ banlist = { --userids
     end
     end
     if go == false then
+    	_G.key = "adminkey"
     if _G.key == "wtfdoiadd" or _G.key == "adminkey" then
-_G.key = "4toj34iotu490u9056u3589rehgvenvoenfg"
     StarterGui:SetCore("SendNotification", {
         Title = "Credits",
         Text = "created by Forxsion#4954",
@@ -123,6 +123,8 @@ local GC = getconnections or get_signal_cons --Anti Afk
     converttokens = false,
     autolaptop = false,
     autosupplies = false,
+    supplycount = 1,
+    supplytype = 3,
     }
     if placeid == level1 then
     moptppoint = workspace.RoofP.Position + Vector3.new(0, 10, 0)
@@ -217,6 +219,20 @@ local GC = getconnections or get_signal_cons --Anti Afk
             end
         end))
             end)
+            
+            shop:Textbox("Amount of times supply it gotten (number)", "Will repeat getting supply this amount of times before teleporting back to floor 1", false, function(t)
+				originaldata["supplycount"] = tonumber(t)
+			end)
+
+            local suptype = shop:Dropdown("Supply amount/type", {"1 (1 good)", "2 (5 goods)", "3 (20 goods)"}, function(t)
+                local newt = string.split(t, " ")[1]
+                originaldata["supplytype"] = tonumber(newt)
+                print(newt)
+                print(originaldata["supplytype"])
+                end)
+			
+			shop:Line()
+            
             local dog2 = false
             shop:Toggle("Auto get supplies", "Will teleport to floor 3 and back to floor 1 with supplies on its way, then teleport you back to your original shop seat", originaldata["autosupplies"], function(t)
                 originaldata["autosupplies"] = t
@@ -229,17 +245,27 @@ local GC = getconnections or get_signal_cons --Anti Afk
                             floorteleport(3)
                             queueteleport([[
                             wait(3)
-                            local args = {
-                                [1] = 3
+                            local data = {
+                                supplycount = 1,
+                                supplytype = 3
                             }
-                            
-                            game:GetService("ReplicatedStorage").PurchaseEvent:FireServer(unpack(args))
+                            if isfile("TemHubV2/data.txt") then
+                                data = game:GetService("HttpService"):JSONDecode(readfile("TemHubV2/data.txt"))
+                                end
                             local Flux = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/fluxlib.txt")()
                             local win = Flux:Window("TemHub", "Notifications", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
                             wait(1)
                             Flux:Notification("Got supplies, waiting until delivery timer is over", "Okay")
+                            for i=1, data["supplycount"] do
+                            local args = {
+                                [1] = data["supplytype"]
+                            }
+                            
+                            game:GetService("ReplicatedStorage").PurchaseEvent:FireServer(unpack(args))
                             local plr = game.Players.LocalPlayer
+                            if not plr.PlayerGui:FindFirstChild("PurchaseSupply") then
                             game.ReplicatedStorage.PurchaseSupply:Clone().Parent = plr.PlayerGui
+                            end
                             local dog = false
                             repeat wait()
                                 coroutine.resume(coroutine.create(function()
@@ -254,6 +280,7 @@ local GC = getconnections or get_signal_cons --Anti Afk
                             until plr.PlayerGui.PurchaseSupply.Frame.TimeLeft.TextLabel.TextLabel.Timer.Value > 0
                             repeat wait()
                             until plr.PlayerGui.PurchaseSupply.Frame.TimeLeft.TextLabel.TextLabel.Timer.Value <= 0
+                        end
                             local args = {
                                 [1] = 1
                             }
