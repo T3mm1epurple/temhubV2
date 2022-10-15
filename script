@@ -259,13 +259,12 @@ local GC = getconnections or get_signal_cons --Anti Afk
                             
                             game:GetService("ReplicatedStorage").TeleportEvent:FireServer(unpack(args))
                             local dog = false
-                            game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
-                                if State == Enum.TeleportState.Started then
                                     if dog == false then
                                         dog = true
+                                        local queueteleport = syn and syn.queue_on_teleport or queue_on_teleport or fluxus and fluxus.queue_on_teleport or function() end
                                 queueteleport([=[
                                     wait(7)
-                                    game.Players.LocalPlayer.PlayerGui.Menu.Enabled = false 
+                                    game.Players.LocalPlayer.PlayerGui:WaitForChild("Menu").Enabled = false 
                                     workspace.CurrentCamera.CameraType = Enum.CameraType.Custom 
                                     workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid 
                                     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
@@ -285,8 +284,6 @@ local GC = getconnections or get_signal_cons --Anti Afk
                                     loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", true))()
                                 ]=])
                                 end
-                            end
-                            end)
                             ]]) -- script there
                     end
                     end
