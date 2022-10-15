@@ -123,7 +123,6 @@ local GC = getconnections or get_signal_cons --Anti Afk
     converttokens = false,
     autolaptop = false,
     autosupplies = false,
-    supplycount = 1,
     supplytype = 3,
     }
     if placeid == level1 then
@@ -219,10 +218,6 @@ local GC = getconnections or get_signal_cons --Anti Afk
             end
         end))
             end)
-            
-            shop:Textbox("Amount of times supply it gotten (number)", "Will repeat getting supply this amount of times before teleporting back to floor 1", false, function(t)
-				originaldata["supplycount"] = tonumber(t)
-			end)
 
             local suptype = shop:Dropdown("Supply amount/type", {"1 (1 good)", "2 (5 goods)", "3 (20 goods)"}, function(t)
                 local newt = string.split(t, " ")[1]
@@ -246,7 +241,6 @@ local GC = getconnections or get_signal_cons --Anti Afk
                             queueteleport([[
                             wait(3)
                             local data = {
-                                supplycount = 1,
                                 supplytype = 3
                             }
                             if isfile("TemHubV2/data.txt") then
@@ -256,7 +250,6 @@ local GC = getconnections or get_signal_cons --Anti Afk
                             local win = Flux:Window("TemHub", "Notifications", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
                             wait(1)
                             Flux:Notification("Got supplies, waiting until delivery timer is over", "Okay")
-                            for i=1, data["supplycount"] do
                             local args = {
                                 [1] = data["supplytype"]
                             }
@@ -280,7 +273,6 @@ local GC = getconnections or get_signal_cons --Anti Afk
                             until plr.PlayerGui.PurchaseSupply.Frame.TimeLeft.TextLabel.TextLabel.Timer.Value > 0
                             repeat wait()
                             until plr.PlayerGui.PurchaseSupply.Frame.TimeLeft.TextLabel.TextLabel.Timer.Value <= 0
-                        end
                             local args = {
                                 [1] = 1
                             }
