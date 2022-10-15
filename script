@@ -225,6 +225,10 @@ local GC = getconnections or get_signal_cons --Anti Afk
                 print(newt)
                 print(originaldata["supplytype"])
                 end)
+
+                if plr.attributes.TotalSupplyNo.Value >= 150 then
+                suptype:Add("4 (50 goods)")
+                end
 			
 			shop:Line()
             
