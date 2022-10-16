@@ -124,6 +124,8 @@ local GC = getconnections or get_signal_cons --Anti Afk
     autolaptop = false,
     autosupplies = false,
     supplytype = 3,
+    removeblur = false,
+    disableseats = false,
     }
     if placeid == level1 then
     moptppoint = workspace.RoofP.Position + Vector3.new(0, 10, 0)
@@ -630,10 +632,11 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                     end)
     end
         
-     other:Toggle("Disable Seats (dont enable this while sitting)", "Stops player from sitting in seats (good for auto mop)", false, function(t)
+     other:Toggle("Disable Seats (dont enable this while sitting)", "Stops player from sitting in seats (good for auto mop)", originaldata["disableseats"], function(t)
+        originaldata["disableseats"] = t
          for i,seat in pairs(workspace:GetDescendants()) do
             if seat:IsA("Seat") then
-                seat.Disabled = t
+                seat.Disabled = originaldata["disableseats"]
             end
          end
          end)
@@ -657,6 +660,19 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
             end
         end))
             end)
+
+            other:Toggle("Auto remove blur", "Removes blur when player is sick", originaldata["removeblur"], function(t)
+                originaldata["removeblur"] = t
+                coroutine.resume(coroutine.create(function()
+                while originaldata["removeblur"] == true do
+                    game.Lighting:WaitForChild("Blur").Enabled = false
+                wait()
+                else
+                    game.Lighting:WaitForChild("Blur").Enabled = true
+                    wait()
+                end
+            end))
+                end)
 
         setting:Button("Save data", "Saves all values to be loaded again when rejoining (gets rid of old data if it exists and replaces it)", function()
             savedata()
