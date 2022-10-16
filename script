@@ -126,6 +126,7 @@ local GC = getconnections or get_signal_cons --Anti Afk
     supplytype = 3,
     removeblur = false,
     disableseats = false,
+    automentos = false,
     }
     if placeid == level1 then
     moptppoint = workspace.RoofP.Position + Vector3.new(0, 10, 0)
@@ -426,6 +427,33 @@ local GC = getconnections or get_signal_cons --Anti Afk
                                 if plr.Character ~= nil and plr.Character:FindFirstChild("Humanoid") then
                                     if plr.Character.Humanoid.Health > 0 then
                                 if tool:IsA("Tool") and tool.Name == originaldata["soda"] then
+                                    tool:Activate()
+                                end
+                            end
+                            end
+                        end
+                    end
+                        end
+                            wait()
+                            end
+                        end))
+                        end)
+
+                        drink:Line()
+
+                        drink:Toggle("Auto mentos", "Auto uses mentos if player has it", originaldata["automentos"], function(t)
+                            originaldata["automentos"] = t
+                            coroutine.resume(coroutine.create(function()
+                            while originaldata["automentos"] == true do
+                                if plr.Character ~= nil and plr.Character:FindFirstChild("Humanoid") then
+                                    if plr.Character.Humanoid.Health > 0 then
+                            if plr.Backpack:FindFirstChild("Mentos") then
+                                plr.Backpack.Mentos.Parent = plr.Character
+                            end
+                            for i,tool in pairs(plr.Character:GetChildren()) do
+                                if plr.Character ~= nil and plr.Character:FindFirstChild("Humanoid") then
+                                    if plr.Character.Humanoid.Health > 0 then
+                                if tool:IsA("Tool") and tool.Name == "Mentos" then
                                     tool:Activate()
                                 end
                             end
