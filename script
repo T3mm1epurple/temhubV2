@@ -11,8 +11,8 @@ banlist = { --userids
     end
     end
     if go == false then
-    	_G.key = "adminkey"
     if _G.key == "wtfdoiadd" or _G.key == "adminkey" then
+_G.key = "eirh2349y54893tgrbeuindoiwqhfjdb9q23934q8yt9UY"
     StarterGui:SetCore("SendNotification", {
         Title = "Credits",
         Text = "created by Forxsion#4954",
@@ -663,15 +663,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
 
             other:Toggle("Auto remove blur", "Removes blur when player is sick", originaldata["removeblur"], function(t)
                 originaldata["removeblur"] = t
-                coroutine.resume(coroutine.create(function()
-                while originaldata["removeblur"] == true do
-                    game.Lighting:WaitForChild("Blur").Enabled = false
-                wait()
-                else
-                    game.Lighting:WaitForChild("Blur").Enabled = true
-                    wait()
-                end
-            end))
+                game.Lighting:WaitForChild("Blur").Enabled = not originaldata["removeblur"]
                 end)
 
         setting:Button("Save data", "Saves all values to be loaded again when rejoining (gets rid of old data if it exists and replaces it)", function()
