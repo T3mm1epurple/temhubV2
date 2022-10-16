@@ -256,7 +256,7 @@ local GC = getconnections or get_signal_cons --Anti Afk
                             local Flux = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/fluxlib.txt")()
                             local win = Flux:Window("TemHub", "Notifications", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
                             wait(1)
-                            Flux:Notification("Got supplies, waiting until delivery timer is over", "Okay")
+                            Flux:Notification("Got supplies, teleporting back to level 2", "Okay")
                             local args = {
                                 [1] = data["supplytype"]
                             }
@@ -278,8 +278,6 @@ local GC = getconnections or get_signal_cons --Anti Afk
                                     break
                                 end
                             until plr.PlayerGui.PurchaseSupply.Frame.TimeLeft.TextLabel.TextLabel.Timer.Value > 0
-                            repeat wait()
-                            until plr.PlayerGui.PurchaseSupply.Frame.TimeLeft.TextLabel.TextLabel.Timer.Value <= 0
                             local args = {
                                 [1] = 1
                             }
@@ -307,8 +305,42 @@ local GC = getconnections or get_signal_cons --Anti Afk
                                         end
                                     end
                                     end
+                                    game.Players.LocalPlayer.attributes.SupplyShop.Value = 49
                                     _G.key = "adminkey"
                                     loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", true))()
+                                    if game.Players.LocalPlayer.PlayerGui:FindFirstChild("GuiMessageCountdown2") then
+                                    local StarterGui = game:GetService("StarterGui")
+                                    local bindable = Instance.new("BindableFunction")
+                                    StarterGui:SetCore("SendNotification", {
+                                            Title = "Auto get supply",
+                                            Text = "Waiting until timer is over, then will get supplies",
+                                            Duration = game.Players.LocalPlayer.PlayerGui.GuiMessageCountdown2.Frame.Left.Value,
+                                            Callback = bindable,
+                                    })
+                                    repeat wait()
+                                    until game.Players.LocalPlayer.PlayerGui.GuiMessageCountdown2.Frame.Left.Value <= 0
+                                    game.Players.LocalPlayer.Character.Humanoid.Jump = true
+                                    game.Players.LocalPlayer.PlayerGui.GuiMessageCountdown2:Destroy()
+                                    StarterGui:SetCore("SendNotification", {
+                                        Title = "Auto get supply",
+                                        Text = "Got supplies!",
+                                        Duration = 5,
+                                        Callback = bindable,
+                                })
+                                    wait(1)
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.SupplyTimerThing.Sensor1.CFrame
+                                    wait(1)
+                                    fireproximityprompt(workspace.SupplyTimerThing.Sensor1.ProximityPrompt)
+                                    wait(1)
+                                    for i,shop in pairs(workspace.Shops:GetChildren()) do
+                                        if shop:FindFirstChild("ShopSeat") then
+                                        if not shop.ShopSeat.SeatShop:FindFirstChild("SeatWeld") then
+                                            shop.ShopSeat.SeatShop:Sit(game.Players.LocalPlayer.Character.Humanoid)
+                                            break
+                                        end
+                                    end
+                                end
+                                    end
                                 ]=])
                                 end
                             ]]) -- script there
