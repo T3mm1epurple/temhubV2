@@ -309,6 +309,7 @@ local GC = getconnections or get_signal_cons --Anti Afk
                                     _G.key = "adminkey"
                                     loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", true))()
                                     if game.Players.LocalPlayer.PlayerGui:FindFirstChild("GuiMessageCountdown2") then
+                                        game.Players.LocalPlayer.PlayerGui.GuiMessageCountdown2.Frame.Visible = false
                                     local StarterGui = game:GetService("StarterGui")
                                     local bindable = Instance.new("BindableFunction")
                                     StarterGui:SetCore("SendNotification", {
