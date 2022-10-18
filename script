@@ -292,20 +292,12 @@ local GC = getconnections or get_signal_cons --Anti Afk
                                     game.Players.LocalPlayer.PlayerGui:WaitForChild("Menu").Enabled = false 
                                     workspace.CurrentCamera.CameraType = Enum.CameraType.Custom 
                                     workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid 
-                                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.SupplyTimerThing.Sensor1.CFrame
                                     wait(1)
                                     fireproximityprompt(workspace.SupplyTimerThing.Sensor1.ProximityPrompt)
                                     wait(1)
-                                    for i,shop in pairs(workspace.Shops:GetChildren()) do
-                                        if shop:FindFirstChild("ShopSeat") then
-                                        if not shop.ShopSeat.SeatShop:FindFirstChild("SeatWeld") then
-                                            shop.ShopSeat.SeatShop:Sit(game.Players.LocalPlayer.Character.Humanoid)
-                                            break
-                                        end
-                                    end
-                                    end
                                     game.Players.LocalPlayer.attributes.SupplyShop.Value = 49
+                                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
                                     _G.key = "adminkey"
                                     loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", true))()
                                     if game.Players.LocalPlayer.PlayerGui:FindFirstChild("GuiMessageCountdown2") then
@@ -333,7 +325,11 @@ local GC = getconnections or get_signal_cons --Anti Afk
                                     wait(1)
                                     fireproximityprompt(workspace.SupplyTimerThing.Sensor1.ProximityPrompt)
                                     wait(1)
+                                    repeat wait()
                                     for i,shop in pairs(workspace.Shops:GetChildren()) do
+                                        if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+                                            break
+                                        end
                                         if shop:FindFirstChild("ShopSeat") then
                                         if not shop.ShopSeat.SeatShop:FindFirstChild("SeatWeld") then
                                             shop.ShopSeat.SeatShop:Sit(game.Players.LocalPlayer.Character.Humanoid)
@@ -341,6 +337,7 @@ local GC = getconnections or get_signal_cons --Anti Afk
                                         end
                                     end
                                 end
+                            until game.Players.LocalPlayer.Character.Humanoid.Sit == true
                                     end
                                 ]=])
                                 end
@@ -760,7 +757,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     setting:Label("Built in Anti-Afk")
 
-    setting:Label("Version 2.75")
+    setting:Label("Version 2.8 (bug fixes)")
     
     else
     print("wrong key")
