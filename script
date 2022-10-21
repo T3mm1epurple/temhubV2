@@ -639,6 +639,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                                                                 end
                                                             end
                                                         else
+							   savedata()
                                                             floorteleport(newlevel)
                                                             queueteleport([[
                                                                 wait(3)
