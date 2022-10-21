@@ -91,6 +91,7 @@ local GC = getconnections or get_signal_cons --Anti Afk
     shop = win:Tab("Shop", "http://www.roblox.com/asset/?id=6023426915")
     drink = win:Tab("7/11", "http://www.roblox.com/asset/?id=6023426915")
     clean = win:Tab("Cleaning", "http://www.roblox.com/asset/?id=6023426915")
+    mail = win:Tab("Mail Delivery", "http://www.roblox.com/asset/?id=6023426915")
     end
     if placeid == level3 then
         working = win:Tab("Working", "http://www.roblox.com/asset/?id=6023426915")
@@ -127,6 +128,7 @@ local GC = getconnections or get_signal_cons --Anti Afk
     removeblur = false,
     disableseats = false,
     automentos = false,
+    automail = false,
     }
     if placeid == level1 then
     moptppoint = workspace.RoofP.Position + Vector3.new(0, 10, 0)
@@ -568,6 +570,140 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
             clean:Toggle("Enable teleport point", "Will teleport the player to that spot after mopping all current vomit stains (helps with not being caught)", originaldata["enablemoppoint"], function(t)
                 originaldata["enablemoppoint"] = t
             end)
+
+            mail:Button("Get Mail", "Gives player mail if one isn't in inventory", function()
+                for i, box in pairs(workspace:GetChildren()) do
+                    if box.Name == "Mail1" or box.Name == "Mail2" or box.Name == "Mail3" then
+                        local pos = plr.Character.HumanoidRootPart.CFrame
+                                if box:IsA("Model") then
+                                    plr.Character.HumanoidRootPart.CFrame = box.Handle.CFrame
+                                else
+                                    plr.Character.HumanoidRootPart.CFrame = box.CFrame
+                                end
+                                task.wait(0.5)
+                                fireclickdetector(box:FindFirstChildOfClass("ClickDetector"))
+                                plr.Character.HumanoidRootPart.CFrame = pos
+                        break
+                    end
+                end
+                end)
+
+                mail:Line()
+
+                mail:Toggle("Auto deliver mail", "Auto gets mail then teleports to floor and gives mail then repeats", originaldata["automail"], function(t)
+                    originaldata["automail"] = t
+                    coroutine.resume(coroutine.create(function()
+                    while originaldata["automail"] == true do
+                        local hastool = false
+                        for i, tool in pairs(plr.Backpack:GetChildren()) do
+                            if tool:FindFirstChild("To") then
+                                hastool = true
+                            end
+                        end
+                        if hastool == false then
+                        for i, box in pairs(workspace:GetChildren()) do
+                            if box.Name == "Mail1" or box.Name == "Mail2" or box.Name == "Mail3" then
+                                local pos = plr.Character.HumanoidRootPart.CFrame
+                                if box:IsA("Model") then
+                                    plr.Character.HumanoidRootPart.CFrame = box.Handle.CFrame
+                                else
+                                    plr.Character.HumanoidRootPart.CFrame = box.CFrame
+                                end
+                                task.wait(0.5)
+                                fireclickdetector(box:FindFirstChildOfClass("ClickDetector"))
+                                break
+                            end
+                        end
+                    end
+                        for i, part in pairs(workspace:GetChildren()) do
+                        if part.Name == "Part" and part:FindFirstChildOfClass("SurfaceGui") then
+                            if part:FindFirstChildOfClass("SurfaceGui"):FindFirstChildOfClass("Frame") then
+                                if part:FindFirstChildOfClass("SurfaceGui"):FindFirstChildOfClass("Frame"):FindFirstChild("Level1") and part:FindFirstChildOfClass("SurfaceGui"):FindFirstChildOfClass("Frame"):FindFirstChild("Level2") then
+                                    local gui = part:FindFirstChildOfClass("SurfaceGui"):FindFirstChildOfClass("Frame")
+                                    for i, obje in pairs(gui:GetDescendants()) do
+                                        if obje.Parent.Parent == gui then
+                                            plr.Character.Humanoid:UnequipTools()
+                                            for i, tool in pairs(plr.Backpack:GetChildren()) do
+                                                if tool:FindFirstChild("To") then
+                                                    tool.Parent = plr.Character
+                                                    local val = tool.To.SurfaceGui.To.Text
+                                                    if obje.Text == val then
+                                                        local oldtext = obje.Parent.Text
+                                                        local newlevel = tonumber(string.gsub(oldtext, "%D", ""))
+                                                        if newlevel == 1 or newlevel == 2 then
+                                                            for i, npc in pairs(workspace:GetChildren()) do
+                                                                if npc.Name == val then
+                                                                    plr.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame
+                                                                    wait(.5)
+                                                                    fireclickdetector(npc:FindFirstChildOfClass("ClickDetector"))
+                                                                end
+                                                            end
+                                                        else
+                                                            floorteleport(newlevel)
+                                                            queueteleport([[
+                                                                wait(3)
+                                                                local plr = game.Players.LocalPlayer
+                                                                while wait() do
+                                                                    if plr:FindFirstChild("Backpack") then
+                                                                for i, tool in pairs(plr.Backpack:GetChildren()) do
+                                                                    if tool ~= nil then
+                                                                    if tool:FindFirstChild("To") then
+                                                                        tool.Parent = plr.Character
+                                                                        local toolname = tool.Name
+                                                                        repeat wait()
+                                                                        until tool.To.SurfaceGui.To.Text ~= ""
+                                                                local val = tool.To.SurfaceGui.To.Text
+                                                                for i, npc in pairs(workspace:GetChildren()) do
+                                                                    if npc.Name == val then
+                                                                        plr.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame
+                                                                        wait(.5)
+                                                                        repeat wait()
+                                                                        fireclickdetector(npc:FindFirstChildOfClass("ClickDetector"))
+                                                                        until not plr.Character:FindFirstChild(toolname)
+                                                                        wait(1)
+                                                                        local args = {
+                                                                            [1] = 1
+                                                                        }
+                                                                        
+                                                                        game:GetService("ReplicatedStorage").TeleportEvent:FireServer(unpack(args))
+                                                                        local dog = false
+                                                                                if dog == false then
+                                                                                    dog = true
+                                                                                    local queueteleport = syn and syn.queue_on_teleport or queue_on_teleport or fluxus and fluxus.queue_on_teleport or function() end
+                                                                                    queueteleport([=[
+                                                                                        wait(7)
+                                                                                        game.Players.LocalPlayer.PlayerGui:WaitForChild("Menu").Enabled = false 
+                                                                                        workspace.CurrentCamera.CameraType = Enum.CameraType.Custom 
+                                                                                        workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid 
+                                                                                        wait(1)
+                                                                                        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+                                                                                        _G.key = "adminkey"
+                                                                                        loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", true))()
+                                                                                    ]=])
+                                                                                end
+                                                                    end
+                                                                end
+                                                                    end
+                                                                end
+                                                                    wait()
+                                                            end
+                                                                end
+                                                                end
+                                                            ]])
+                                                        end
+                                                    end
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                    wait()
+                    end
+                end))
+                    end)
     end
     
     if placeid == level3 then
