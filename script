@@ -600,6 +600,11 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                                 hastool = true
                             end
                         end
+			for i, tool in pairs(plr.Character:GetChildren()) do
+                            if tool:FindFirstChild("To") and tool:IsA("Tool") then
+                                hastool = true
+                            end
+                        end
                         if hastool == false then
                         for i, box in pairs(workspace:GetChildren()) do
 			if box ~= nil then
