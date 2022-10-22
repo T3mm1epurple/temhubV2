@@ -602,6 +602,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                         end
                         if hastool == false then
                         for i, box in pairs(workspace:GetChildren()) do
+			if box ~= nil then
                             if box.Name == "Mail1" or box.Name == "Mail2" or box.Name == "Mail3" then
                                 local pos = plr.Character.HumanoidRootPart.CFrame
                                 if box:IsA("Model") then
@@ -610,9 +611,12 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                                     plr.Character.HumanoidRootPart.CFrame = box.CFrame
                                 end
                                 task.wait(0.5)
+				if box:FindFirstChildOfClass("ClickDetector") then
                                 fireclickdetector(box:FindFirstChildOfClass("ClickDetector"))
                                 break
+				end
                             end
+			    end
                         end
                     end
                         for i, part in pairs(workspace:GetChildren()) do
@@ -894,7 +898,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     setting:Label("Built in Anti-Afk")
 
-    setting:Label("Version 2.9")
+    setting:Label("Version 2.93")
     
     else
     print("wrong key")
