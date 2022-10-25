@@ -924,7 +924,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     setting:Label("Built in Anti-Afk")
 
-    setting:Label("Version 3 [ANTI-CHEAT PATCH]")
+    setting:Label("Version 3.0 [ANTI-CHEAT PATCH]")
     
     else
     print("wrong key")
