@@ -317,7 +317,9 @@ local GC = getconnections or get_signal_cons --Anti Afk
                                     workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character:WaitForChild("Humanoid") 
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace:WaitForChild("SupplyTimerThing"):WaitForChild("Sensor1").CFrame
                                     wait(1)
-                                    fireproximityprompt(workspace.SupplyTimerThing.Sensor1.ProximityPrompt)
+                                    repeat wait()
+                                    fireproximityprompt(workspace:WaitForChild("SupplyTimerThing"):WaitForChild("Sensor1"):WaitForChild("ProximityPrompt"))
+                                    until game.Players.LocalPlayer.PlayerGui:FindFirstChild("GuiMessageCountdown2")
                                     wait(1)
                                     game.Players.LocalPlayer.attributes.SupplyShop.Value = 49
                                     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
