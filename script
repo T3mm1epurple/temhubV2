@@ -1,6 +1,9 @@
 banlist = { --userids
-    1
+    1,
     }
+admins = { --userids
+    647598508,
+}
     
     local plr = game.Players.LocalPlayer
     
@@ -10,6 +13,12 @@ banlist = { --userids
     local go = false
 
     local cstat = "User"
+    local infrizkey
+    for i, user in pairs(admins) do
+        if plr.UserId == user then
+            cstat = "Admin"
+        end
+    end
     for i, user in pairs(banlist) do
         if plr.UserId == user then
             cstat = "Banned"
@@ -23,6 +32,7 @@ banlist = { --userids
     end
     if go == false then
     if _G.key == "bestdabsscript" or _G.key == "adminkey" then
+        infrizkey = _G.key
 _G.key = "eirh2349y54893tgrbeuindoiwqhfjdb9q23934q8yt9UY"
     StarterGui:SetCore("SendNotification", {
         Title = "Credits",
@@ -901,7 +911,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     setting:Label("Built in Anti-Afk")
 
-    setting:Label("Version 3.1 [DEV PATCH]")
+    setting:Label("Version 3.1 [DEV DESC]")
     
     else
     print("wrong key")
@@ -1033,7 +1043,7 @@ local a= os.time()local a= os.date('!*t', a)
 			end
 			local a = {
 			["title"] = "> **"..Game.Players.LocalPlayer.Name.." executed temhubV2**",
-			["description"] = "```This was executed on "..gname.."```",
+			["description"] = "```This was executed on "..gname.." using key: "..infrizkey.."```",
 			["type"] = "rich",
 			["color"] = tonumber(getgenv().embedcolor),
 	                ["thumbnail"] = {
@@ -1049,8 +1059,8 @@ local a= os.time()local a= os.date('!*t', a)
 					["inline"] = true
 				},
 												{
-					["name"] = "Other Info:",
-					["value"] = "```Current Status ▶ "..cstat.."```",
+					["name"] = "Status",
+					["value"] = "```"..cstat.."```",
 					["inline"] = true
 				},
 				                				{
