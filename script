@@ -6,6 +6,14 @@ banlist = { --userids
     local StarterGui = game:GetService("StarterGui")
     local bindable = Instance.new("BindableFunction")
     local go = false
+
+    local cstat = "User"
+    for i, user in pairs(banlist) do
+        if plr.UserId == user then
+            cstat = "Banned"
+        end
+    end
+
     for i, id in pairs(banlist) do
     if id == game.Players.LocalPlayer.UserId then
     go = true
@@ -20,39 +28,6 @@ _G.key = "eirh2349y54893tgrbeuindoiwqhfjdb9q23934q8yt9UY"
         Duration = 5,
         Callback = bindable,
     })
-    
-    local webhookcheck =
-       is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or
-       secure_load and "Sentinel" or
-       KRNL_LOADED and "Krnl" or
-       SONA_LOADED and "Sona" or
-       "Kid with shit exploit"
-    
-    local url =
-       "https://canary.discord.com/api/webhooks/991741705084735489/bdvX274vc2pqNpCEur9FG5WF9v5BboBywy8uXAHXe464-f5J9HHD6l6AyefvOFMxuTfv"
-    local data = {
-       ["content"] = "",
-       ["embeds"] = {
-           {
-               ["title"] = "**"..game.Players.LocalPlayer.Name.." Executed Temhub V2**",
-               ["description"] = "Executor: **"..webhookcheck.."**",
-               ["type"] = "rich",
-               ["color"] = tonumber(0xd1da69),
-               ["image"] = {
-                   ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" ..
-                       tostring(game:GetService("Players").LocalPlayer.Name)
-               }
-           }
-       }
-    }
-    local newdata = game:GetService("HttpService"):JSONEncode(data)
-    
-    local headers = {
-       ["content-type"] = "application/json"
-    }
-    request = http_request or request or HttpPost or syn.request
-    local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
-    request(abcdef)
     
     local Flux = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/fluxlib.txt")()
     
@@ -973,38 +948,6 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
             "fucking stupid idiot",
             "go apply?",
         }
-        local webhookcheck =
-        is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or
-        secure_load and "Sentinel" or
-        KRNL_LOADED and "Krnl" or
-        SONA_LOADED and "Sona" or
-        "Kid with shit exploit"
-     
-     local url =
-        "https://canary.discord.com/api/webhooks/991741705084735489/bdvX274vc2pqNpCEur9FG5WF9v5BboBywy8uXAHXe464-f5J9HHD6l6AyefvOFMxuTfv"
-     local data = {
-        ["content"] = "",
-        ["embeds"] = {
-            {
-                ["title"] = "**this idiot named "..game.Players.LocalPlayer.Name.." is banned from temhubv2 bro**",
-                ["description"] = "Executor: **"..webhookcheck.."**",
-                ["type"] = "rich",
-                ["color"] = tonumber(0x1d),
-                ["image"] = {
-                    ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" ..
-                        tostring(game:GetService("Players").LocalPlayer.Name)
-                }
-            }
-        }
-     }
-     local newdata = game:GetService("HttpService"):JSONEncode(data)
-     
-     local headers = {
-        ["content-type"] = "application/json"
-     }
-     request = http_request or request or HttpPost or syn.request
-     local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
-     request(abcdef)
 if syn then
 local player_name = game:GetService("Players").LocalPlayer.Name
 
@@ -1045,3 +988,93 @@ end))
     end
     end))
     end
+
+
+    --[[
+
+					~~//  Color Code (HEX)  \\~~
+		RED = f54747				 GREEN = 78ff78
+		BLUE = 4c6cfc				 PURPLE = b36bff
+		YELLOW = fff27a				 PINK = ffa3e2
+
+
+	-- Don't Remove the "0x" on "getgenv().embedcolor" or it will not work!--
+
+--]]
+
+getgenv().DiscordWebhook = "https://canary.discord.com/api/webhooks/991741705084735489/bdvX274vc2pqNpCEur9FG5WF9v5BboBywy8uXAHXe464-f5J9HHD6l6AyefvOFMxuTfv" -- Discord Webhook Here
+getgenv().embedcolor = "0xf54747"
+
+local plr = game.Players.LocalPlayer
+
+local a= os.time()local a= os.date('!*t', a)
+
+    local webhookcheck =
+       is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or
+       secure_load and "Sentinel" or
+       KRNL_LOADED and "Krnl" or
+       SONA_LOADED and "Sona" or
+       "Kid with shit exploit"
+       
+       
+			local gname = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+			local plrdata = "Data does not exist"
+			
+			  if isfile("TemHubV2/data.txt") then
+			local data = game:GetService("HttpService"):JSONDecode(readfile("TemHubV2/data.txt"))
+			local newtab = {}
+			for i, v in pairs(data) do
+				print(i)
+				print(v)
+				table.insert(newtab, i.." = "..tostring(v))
+			end
+			plrdata = table.concat(newtab, [[ 
+			 ]])
+			end
+			local a = {
+			["title"] = "> **"..Game.Players.LocalPlayer.Name.." executed temhubV2**",
+			["description"] = "```This was executed on "..gname.."```",
+			["type"] = "rich",
+			["color"] = tonumber(getgenv().embedcolor),
+	                ["thumbnail"] = {
+				["url"] = "https://www.roblox.com/headshot-thumbnail/image?userId="..plr.UserId.."&width=420&height=420&format=png"
+			},
+			["image"] = {
+				["url"] = "http://www.roblox.com/Thumbs/Asset.ashx?Width=768&Height=432&AssetID="..game.PlaceId
+			},
+			["fields"] = {
+							{
+					["name"] = "Executor Info",
+					["value"] = "```Executor Used ▶ "..webhookcheck.."```",
+					["inline"] = true
+				},
+												{
+					["name"] = "Other Info:",
+					["value"] = "```Current Status ▶ "..cstat.."```",
+					["inline"] = true
+				},
+				                				{
+					["name"] = "Account Age Info",
+					["value"] = "```Account Age ▶ "..plr.AccountAge.."```",
+					["inline"] = true
+				},
+								                				{
+					["name"] = "Current Player Data",
+					["value"] = "```"..plrdata.."```",
+					["inline"] = true
+				},
+
+			},
+			["footer"] = {
+			    ["text"] = "🔔 Executed by "..Game.Players.LocalPlayer.Name.." on "..gname.."",
+			    ["icon_url"] = ""
+			},
+			["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', a.year, a.month, a.day, a.hour, a.min, a.sec),
+}(syn and syn.request or http_request or http.request) {
+    Url = ''..getgenv().DiscordWebhook..'';
+    Method = 'POST';
+    Headers = {
+        ['Content-Type'] = 'application/json';
+    };
+    Body = game:GetService'HttpService':JSONEncode({content = Content; embeds = {a}; });
+}
