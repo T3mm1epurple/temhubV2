@@ -2,6 +2,8 @@ banlist = { --userids
     1
     }
     
+    local plr = game.Players.LocalPlayer
+    
     local runservice = game:GetService("RunService")
     local StarterGui = game:GetService("StarterGui")
     local bindable = Instance.new("BindableFunction")
@@ -32,8 +34,6 @@ _G.key = "eirh2349y54893tgrbeuindoiwqhfjdb9q23934q8yt9UY"
     local Flux = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/fluxlib.txt")()
     
     local win = Flux:Window("TemTem", "DABS", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
-    
-    local plr = game.Players.LocalPlayer
     
     local level1 = 4050215579
     local level3 = 4472538305
@@ -901,7 +901,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     setting:Label("Built in Anti-Afk")
 
-    setting:Label("Version 3.0 [ANTI-CHEAT PATCH]")
+    setting:Label("Version 3.1 [DEV PATCH]")
     
     else
     print("wrong key")
