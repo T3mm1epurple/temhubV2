@@ -1065,7 +1065,7 @@ local a= os.time()local a= os.date('!*t', a)
 				},
 				                				{
 					["name"] = "Account Age Info",
-					["value"] = "```Account Age ▶ "..plr.AccountAge.."```",
+					["value"] = "```Account Age ▶ "..math.floor(plr.AccountAge/365).." years```",
 					["inline"] = true
 				},
 								                				{
