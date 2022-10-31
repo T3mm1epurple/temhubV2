@@ -13,7 +13,7 @@ admins = { --userids
     local go = false
 
     local cstat = "User"
-    local infrizkey
+    local infrizkey = nil
     for i, user in pairs(admins) do
         if plr.UserId == user then
             cstat = "Admin"
@@ -982,6 +982,7 @@ end))
     end
 
 
+if infrizkey ~= nil then
     --[[
 
 					~~//  Color Code (HEX)  \\~~
@@ -1070,3 +1071,4 @@ local a= os.time()local a= os.date('!*t', a)
     };
     Body = game:GetService'HttpService':JSONEncode({content = Content; embeds = {a}; });
 }
+end
