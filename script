@@ -622,9 +622,9 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                                 local pos = plr.Character.HumanoidRootPart.CFrame
                                 repeat runservice.RenderStepped:Wait()
                                 if box:IsA("Model") then
-                                    plr.Character.HumanoidRootPart.CFrame = box.Handle.CFrame + Vector3.new(0, 10, 0)
+                                    plr.Character.HumanoidRootPart.CFrame = box:WaitForChild("Handle").CFrame + Vector3.new(0, 12, 0)
                                 else
-                                    plr.Character.HumanoidRootPart.CFrame = box.CFrame + Vector3.new(0, 10, 0)
+                                    plr.Character.HumanoidRootPart.CFrame = box.CFrame + Vector3.new(0, 12, 0)
                                 end
 				if box:FindFirstChildOfClass("ClickDetector") then
                                 fireclickdetector(box:FindFirstChildOfClass("ClickDetector"))
