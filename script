@@ -616,24 +616,23 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                             end
                         end
                         if hastool == false then
-                            repeat runservice.RenderStepped:Wait()
                         for i, box in pairs(workspace:GetChildren()) do
 			if box ~= nil then
                             if box.Name == "Mail1" or box.Name == "Mail2" or box.Name == "Mail3" then
                                 local pos = plr.Character.HumanoidRootPart.CFrame
+                                repeat runservice.RenderStepped:Wait()
                                 if box:IsA("Model") then
-                                    plr.Character.HumanoidRootPart.CFrame = box.Handle.CFrame + Vector3.new(0, -10, 0)
+                                    plr.Character.HumanoidRootPart.CFrame = box.Handle.CFrame + Vector3.new(0, 10, 0)
                                 else
-                                    plr.Character.HumanoidRootPart.CFrame = box.CFrame + Vector3.new(0, -10, 0)
+                                    plr.Character.HumanoidRootPart.CFrame = box.CFrame + Vector3.new(0, 10, 0)
                                 end
 				if box:FindFirstChildOfClass("ClickDetector") then
                                 fireclickdetector(box:FindFirstChildOfClass("ClickDetector"))
-                                break
 				end
+            until box.Parent == nil
+            break
                             end
 			    end
-            until plr.Backpack.ChildAdded:Wait()
-            plr.Character.HumanoidRootPart.CFrame = pos
                         end
                     end
                         for i, part in pairs(workspace:GetChildren()) do
@@ -917,7 +916,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     setting:Label("Built in Anti-Afk")
 
-    setting:Label("Version 3.2 [CONTENT]")
+    setting:Label("Version 3.1 [DEV DESC]")
     
     else
     print("wrong key")
