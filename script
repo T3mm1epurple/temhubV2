@@ -620,16 +620,18 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
 			if box ~= nil then
                             if box.Name == "Mail1" or box.Name == "Mail2" or box.Name == "Mail3" then
                                 local pos = plr.Character.HumanoidRootPart.CFrame
+                                repeat runservice.RenderStepped:Wait()
                                 if box:IsA("Model") then
-                                    plr.Character.HumanoidRootPart.CFrame = box.Handle.CFrame
+                                    plr.Character.HumanoidRootPart.CFrame = box.Handle.CFrame + Vector3.new(0, -10, 0)
                                 else
-                                    plr.Character.HumanoidRootPart.CFrame = box.CFrame
+                                    plr.Character.HumanoidRootPart.CFrame = box.CFrame + Vector3.new(0, -10, 0)
                                 end
-                                task.wait(0.5)
 				if box:FindFirstChildOfClass("ClickDetector") then
                                 fireclickdetector(box:FindFirstChildOfClass("ClickDetector"))
-                                break
 				end
+            until plr.Backpack.ChildAdded:Wait()
+            plr.Character.HumanoidRootPart.CFrame = pos
+            break
                             end
 			    end
                         end
@@ -652,9 +654,11 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                                                         if newlevel == 1 or newlevel == 2 then
                                                             for i, npc in pairs(workspace:GetChildren()) do
                                                                 if npc.Name == val then
-                                                                    plr.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame
-                                                                    wait(.5)
+                                                                    repeat runservice.RenderStepped:Wait()
+                                                                    plr.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame + Vector3.new(0, -10, 0)
                                                                     fireclickdetector(npc:FindFirstChildOfClass("ClickDetector"))
+                                                                    until plr.PlayerGui:FindFirstChild("GuiMessage")
+                                                                    plr.PlayerGui:FindFirstChild("GuiMessage"):Destroy()
                                                                 end
                                                             end
                                                         else
@@ -913,7 +917,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     setting:Label("Built in Anti-Afk")
 
-    setting:Label("Version 3.1 [DEV DESC]")
+    setting:Label("Version 3.2")
     
     else
     print("wrong key")
