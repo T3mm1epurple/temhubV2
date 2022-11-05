@@ -232,6 +232,20 @@ local GC = getconnections or get_signal_cons --Anti Afk
         end))
             end)
 
+            shop:Button("Find seat", "sends player to shop seat if available", function()
+            for i,shop in pairs(workspace.Shops:GetChildren()) do
+                if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+                    break
+                end
+                if shop:FindFirstChild("ShopSeat") then
+                if not shop.ShopSeat.SeatShop:FindFirstChild("SeatWeld") then
+                    shop.ShopSeat.SeatShop:Sit(game.Players.LocalPlayer.Character.Humanoid)
+                    break
+                end
+            end
+        end
+    end)
+
             local suptype = shop:Dropdown("Supply amount/type", {"1 (1 good)", "2 (5 goods)", "3 (20 goods)"}, function(t)
                 local newt = string.split(t, " ")[1]
                 originaldata["supplytype"] = tonumber(newt)
