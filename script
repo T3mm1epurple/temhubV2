@@ -31,7 +31,7 @@ admins = { --userids
     end
     end
     if go == false then
-    if _G.key == "ffinished" or _G.key == "adminkey" then
+    if _G.key == "forfree" or _G.key == "adminkey" then
         infrizkey = _G.key
 _G.key = "eirh2349y54893tgrbeuindoiwqhfjdb9q23934q8yt9UY"
     StarterGui:SetCore("SendNotification", {
