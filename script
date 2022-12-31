@@ -805,6 +805,15 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     if placeid == level4 then
         doctor:Button("Fast Checkup", "Completes doctor checkup as fast as possible", function()
+            plr.Character.HumanoidRootPart.CFrame = workspace["nurse waman"].HumanoidRootPart.CFrame
+                        repeat wait()
+                        fireclickdetector(workspace["nurse waman"].ClickDetector)
+            until plr.PlayerGui:FindFirstChild("Nurse")
+                        for i, message in pairs(plr.PlayerGui:GetChildren()) do
+                if message.Name == "Nurse" then
+                    message:Destroy()
+                end
+		end
             local args = {
                 [1] = 1
             }
@@ -812,15 +821,23 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
             game:GetService("ReplicatedStorage").DoctorEvent:FireServer(unpack(args))
             repeat wait()
             until plr.PlayerGui:FindFirstChild("GuiMessage")
-            for i, message in pairs(plr.PlayerGui:GetChildren()) do
+                                    for i, message in pairs(plr.PlayerGui:GetChildren()) do
                 if message.Name == "GuiMessage" then
-                    message:Destroy()
-                end
+                	message:Destroy()
             end
+		end
+            plr.Character.HumanoidRootPart.CFrame = workspace["intern kun man"].HumanoidRootPart.CFrame
+            repeat wait()
             fireclickdetector(workspace["intern kun man"].ClickDetector)
+            until plr.PlayerGui:FindFirstChild("Message")
             repeat wait()
             until plr.PlayerGui:FindFirstChild("GuiMessage")
+            plr.Character.HumanoidRootPart.CFrame = workspace["other doc man"].HumanoidRootPart.CFrame
+            wait(1)
             fireclickdetector(workspace["other doc man"].ClickDetector)
+            wait(0.5)
+            plr.Character.HumanoidRootPart.CFrame = workspace["head doc man"].HumanoidRootPart.CFrame
+            wait(1)
             fireclickdetector(workspace["head doc man"].ClickDetector)
             Flux:Notification("Completed fast checkup successfully!", "Okay")
             end)
