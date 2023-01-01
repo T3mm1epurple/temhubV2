@@ -80,6 +80,7 @@ local GC = getconnections or get_signal_cons --Anti Afk
     drink = win:Tab("7/11", "http://www.roblox.com/asset/?id=6023426915")
     clean = win:Tab("Cleaning", "http://www.roblox.com/asset/?id=6023426915")
     mail = win:Tab("Mail Delivery", "http://www.roblox.com/asset/?id=6023426915")
+    funtab = win:Tab("Fun", "http://www.roblox.com/asset/?id=6023426915")
     end
     if placeid == level3 then
         working = win:Tab("Working", "http://www.roblox.com/asset/?id=6023426915")
@@ -117,6 +118,10 @@ local GC = getconnections or get_signal_cons --Anti Afk
     disableseats = false,
     automentos = false,
     automail = false,
+    suitchange = false,
+    suitspeed = 1,
+    hatchange = false,
+    hatspeed = 1,
     }
     if placeid == level1 then
     moptppoint = workspace.RoofP.Position + Vector3.new(0, 10, 0)
@@ -741,11 +746,37 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                     end
                 end))
                     end)
+                    
+                    funtab:Slider("Suit change speed", "how long it is in between each change (speed increases as you go up)", 1, 100, originaldata["suitspeed"],function(t)
+                        originaldata["suitspeed"] = t
+                        end)
+
+                    funtab:Toggle("Auto suit change", "will change suit for speed above (must own all suits if not it will attempt to buy)", originaldata["suitchange"], function(t)
+                        originaldata["suitchange"] = t
+                        coroutine.resume(coroutine.create(function()
+                        while originaldata["suitchange"] == true do
+                            for i, part in pairs(workspace:GetChildren()) do
+                                if part:FindFirstChildOfClass("Decal") and part:FindFirstChild("Sound") and part:FindFirstChild("ClickDetector") and part:FindFirstChild("Price") then
+                                    if originaldata["suitchange"] == true then
+                                        fireclickdetector(part["ClickDetector"])
+                                        wait(5/originaldata["suitspeed"])
+                                    else
+                                        break
+                                    end
+                                end
+                            end
+                        wait()
+                        end
+                    end))
+                        end)
+
+                        funtab:Line()
+
     end
     
     if placeid == level3 then
         working:Label("Nothing here yet")
-        lottery:Slider("Lottery ticket number", "The number your lottery ticket will be", 10, 99,originaldata["ticketnumber"],function(t)
+        lottery:Slider("Lottery ticket number", "The number your lottery ticket will be", 10, 99, originaldata["ticketnumber"],function(t)
             originaldata["ticketnumber"] = t
             end)
     
@@ -947,7 +978,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     setting:Label("Built in Anti-Afk")
 
-    setting:Label("Version 3.1 [DEV DESC]")
+    setting:Label("Version 3.5 fun tab")
     
     else
     print("wrong key")
