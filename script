@@ -771,14 +771,6 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                         end)
 
                         funtab:Line()
-
-funtab:Button("Fire all click detectors", "WARNING THIS MAY GET RID OF ALL OF YOUR MONEY IF YOU DONT OWN EVERYTHING", function()
-            for i, detector in pairs(workspace:GetDescendants()) do
-	    if detector:IsA("ClickDetector") then
-	    fireclickdetector(detector)
-	    end
-	    end
-            end)
     end
     
     if placeid == level3 then
@@ -926,6 +918,14 @@ funtab:Button("Fire all click detectors", "WARNING THIS MAY GET RID OF ALL OF YO
             end
          end
          end)
+	 
+	 other:Button("Fire all click detectors", "WARNING THIS MAY GET RID OF ALL OF YOUR MONEY IF YOU DONT OWN EVERYTHING", function()
+            for i, detector in pairs(workspace:GetDescendants()) do
+	    if detector:IsA("ClickDetector") then
+	    fireclickdetector(detector)
+	    end
+	    end
+            end)
     
     other:Dropdown("Teleport to Floor", {"1", "2", "3", "4", "5"}, function(t)
         local newnum = string.split(t, " ")[1]
