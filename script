@@ -31,7 +31,7 @@ admins = { --userids
     end
     end
     if go == false then
-    if _G.key == "forfree" or _G.key == "adminkey" then
+    if _G.key == "newkey" or _G.key == "adminkey" then
         infrizkey = _G.key
 _G.key = "eirh2349y54893tgrbeuindoiwqhfjdb9q23934q8yt9UY"
     StarterGui:SetCore("SendNotification", {
@@ -772,6 +772,13 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
 
                         funtab:Line()
 
+funtab:Button("Fire all click detectors", "WARNING THIS MAY GET RID OF ALL OF YOUR MONEY IF YOU DONT OWN EVERYTHING", function()
+            for i, detector in pairs(workspace:GetDescendants()) do
+	    if detector:IsA("ClickDetector") then
+	    fireclickdetector(detector)
+	    end
+	    end
+            end)
     end
     
     if placeid == level3 then
