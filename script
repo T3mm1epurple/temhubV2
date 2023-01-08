@@ -985,7 +985,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     setting:Label("Built in Anti-Afk")
 
-    setting:Label("Version 3.5 fun tab")
+    setting:Label("Version 4")
     
     else
     print("wrong key")
