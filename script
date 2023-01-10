@@ -99,8 +99,6 @@ local GC = getconnections or get_signal_cons --Anti Afk
     autobingo = false,
     automop = false,
     autolottery = false,
-    ticketnumber = 10,
-    randomticket = false,
     soda = "",
     autosoda = false,
     autodrink = false,
@@ -773,32 +771,14 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     if placeid == level3 then
         working:Label("Nothing here yet")
-        lottery:Slider("Lottery ticket number", "The number your lottery ticket will be", 10, 99, originaldata["ticketnumber"],function(t)
-            originaldata["ticketnumber"] = t
-            end)
-    
-            lottery:Toggle("Random lottery ticket number", "Instead of using a set ticket number, this will pick a random number between 10-99", originaldata["randomticket"], function(t)
-                originaldata["randomticket"] = t
-                end)
-    
-                lottery:Line()
     
         lottery:Button("Get lottery ticket", "Gives player lottery ticket if one isn't in inventory", function()
-            if originaldata["randomticket"] == false then
-            local args = {
-                [1] = 768,
-                [2] = tostring(ticketnumber)
-            }
-            
-            game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))        
-        else
             local args = {
                 [1] = 768,
                 [2] = tostring(math.random(10, 99))
             }
             
             game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))   
-        end
             end)
             lottery:Button("Throw away lottery ticket", "Throws away players lottery ticket if they have one", function()
                 game:GetService("ReplicatedStorage").ThrowEvent:FireServer()
@@ -810,21 +790,12 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                     originaldata["autolottery"] = t
                     coroutine.resume(coroutine.create(function()
                     while originaldata["autolottery"] == true do
-                        if originaldata["randomticket"] == false then
-                            local args = {
-                                [1] = 768,
-                                [2] = tostring(originaldata["ticketnumber"])
-                            }
-                            
-                            game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))        
-                        else
                             local args = {
                                 [1] = 768,
                                 [2] = tostring(math.random(10, 99))
                             }
                             
                             game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))   
-                        end
                     wait()
                     end
                 end))
@@ -983,7 +954,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     setting:Label("Built in Anti-Afk")
 
-    setting:Label("Version 4.2")
+    setting:Label("Version 4.5")
     
     else
     print("wrong key")
