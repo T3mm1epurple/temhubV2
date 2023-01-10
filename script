@@ -137,7 +137,6 @@ local GC = getconnections or get_signal_cons --Anti Afk
                 local datatable = originaldata
                 writefile("TemHubV2/data.txt", game:GetService("HttpService"):JSONEncode(datatable))
                 local data = game:GetService("HttpService"):JSONDecode(readfile("TemHubV2/data.txt"))
-                print(data)
         end
 
         local function floorteleport(num)
@@ -800,6 +799,44 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                     end
                 end))
                     end)
+
+                    lottery:Line()
+
+                    lottery:Label("Fun Stuff")
+                    local sillycardamount = 1
+                    local getcard = true
+
+                    lottery:Slider("Card Count", "How many cards you will get with the button pressed below", 1, 100, 1,function(t)
+                        sillycardamount = t
+                        end)
+
+                        lottery:Button("Get card count", "Gets the amount of cards above", function()
+                            for number=1, sillycardamount do
+                                if getcard then
+                                print(number)
+                                for i, tool in pairs(plr.Backpack:GetChildren()) do
+                                    if tool.Name == "Card" then
+                                    tool.Parent = plr.Character
+                                end
+                                end
+                                local toolamount = #plr.Backpack:GetChildren()
+                                local args = {
+                                    [1] = 768,
+                                    [2] = tostring(number)
+                                }
+                                
+                                game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))
+                                repeat wait()
+                                until #plr.Backpack:GetChildren() > toolamount
+                                else
+                                    getcard = true
+                                    break
+                            end
+                            end
+                            end)
+                            lottery:Button("Stop getting card count", "Cancels the card getting", function()
+                               getcard = false
+                                end)
     end
     
     if placeid == level4 then
