@@ -784,7 +784,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
                 lottery:Line()
     
         lottery:Button("Get lottery ticket", "Gives player lottery ticket if one isn't in inventory", function()
-            if randomticket == false then
+            if originaldata["randomticket"] == false then
             local args = {
                 [1] = 768,
                 [2] = tostring(ticketnumber)
@@ -983,7 +983,7 @@ loadstring(game:HttpGet("https://github.com/kittenis/temhubV2/raw/main/idkbro", 
     
     setting:Label("Built in Anti-Afk")
 
-    setting:Label("Version 4")
+    setting:Label("Version 4.2")
     
     else
     print("wrong key")
